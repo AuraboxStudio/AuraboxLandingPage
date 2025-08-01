@@ -8,72 +8,107 @@ export default function BenefitsSection(): React.JSX.Element {
       title: "Resultados",
       highlight: "Estagnados",
       description: "Crescimento abaixo do potencial do mercado",
-      position: "top-0 left-0",
+      position: "top-left",
     },
     {
       title: "ROI",
       highlight: "Baixo",
-      description: "Investimento sem retorno mesurável",
-      position: "top-0 right-0",
+      description: "Investimento sem retorno mensurável",
+      position: "top-right",
     },
     {
       title: "Equipe",
-      highlight: "Sobrecarregada",
+      highlight: "Sobrecarregada", 
       description: "Time interno sem foco estratégico",
-      position: "bottom-0 left-0",
+      position: "bottom-left",
     },
     {
       title: "Falta",
       highlight: "de Direção",
       description: "Ausência de estratégia digital clara",
-      position: "bottom-0 right-0",
+      position: "bottom-right",
     },
   ];
 
   return (
-    <section className="flex flex-row gap-16 py-24 px-8 w-full">
-      {/* Left side - Image */}
-      <div className="flex flex-col relative">
-        <img
-          className="w-full max-w-[513px] h-auto object-cover"
-          alt="Pessoa pensando sobre marketing digital"
-          src="/imagem_aurabox_pensando.png"
-        />
-        <img
-          className="w-[100px] h-auto absolute bottom-0 left-6"
-          alt="Logo Aurabox"
-          src="/logo_aurabox_marca.png"
-        />
-      </div>
+    <section className="w-full py-20 bg-gradient-to-br from-[#dfe5e5] to-[#f0f5f5]">
+      <div className="max-w-[1341px] mx-auto px-4">
+        <div className="flex flex-col lg:flex-row gap-16 items-center">
+          {/* Left side - Image */}
+          <div className="flex flex-col relative w-full lg:w-1/2">
+            <div className="relative">
+              <img
+                className="w-full max-w-[513px] h-auto object-cover rounded-[20px] shadow-[0_20px_40px_rgba(0,36,50,0.15)] mx-auto"
+                alt="Pessoa pensando sobre marketing digital"
+                src="/imagem_aurabox_pensando.png"
+              />
+              
+              {/* Logo positioned over the image */}
+              <div className="absolute bottom-4 left-4 lg:left-8">
+                <img
+                  className="w-[80px] h-auto drop-shadow-lg"
+                  alt="Logo Aurabox"
+                  src="/logo_aurabox_marca.png"
+                />
+              </div>
 
-      {/* Right side - Content */}
-      <div className="flex flex-col max-w-[580px]">
-        <h2 className="font-bold text-4xl text-center text-[#002432] mb-8 tracking-normal font-['Bebas_Neue_Pro-Bold',Helvetica]">
-          QUANDO CONTRATAR UMA AGÊNCIA?
-        </h2>
+              {/* Decorative elements */}
+              <div className="absolute -top-4 -right-4 w-8 h-8 bg-[#f78837] rounded-full opacity-60"></div>
+              <div className="absolute top-1/2 -left-2 w-4 h-4 bg-[#26c7b7] rounded-full opacity-70"></div>
+            </div>
+          </div>
 
-        <div className="grid grid-cols-2 gap-6">
-          {benefitCards.map((card, index) => (
-            <Card
-              key={index}
-              className={`relative bg-[#3ebeb3] rounded-[43px] border-[5px] border-solid border-[#002432] shadow-lg overflow-hidden`}
-            >
-              <CardContent className="p-6">
-                <div className="text-center text-[#dfe5e5]">
-                  <p className="font-normal text-[32px] leading-8 font-['Bebas_Neue_Pro-Regular',Helvetica]">
-                    {card.title}
-                    <br />
-                    <span className="font-bold font-['Bebas_Neue_Pro-Bold',Helvetica]">
-                      {card.highlight}
-                    </span>
-                  </p>
-                  <p className="font-medium text-base leading-5 mt-2 font-['Schibsted_Grotesk-Medium',Helvetica]">
-                    {card.description}
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
+          {/* Right side - Content */}
+          <div className="flex flex-col w-full lg:w-1/2 max-w-[600px]">
+            {/* Section Title */}
+            <div className="text-center mb-12">
+              <h2 className="font-['Bebas_Neue_Pro-Bold',Helvetica] font-bold text-[40px] lg:text-[48px] text-[#002432] leading-[0.9] tracking-tight">
+                QUANDO CONTRATAR
+                <br />
+                <span className="text-[#f78837]">UMA AGÊNCIA?</span>
+              </h2>
+            </div>
+
+            {/* Benefits Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              {benefitCards.map((card, index) => (
+                <Card
+                  key={index}
+                  className="relative bg-gradient-to-br from-[#3ebeb3] to-[#2ea89d] rounded-[30px] border-[3px] border-solid border-[#002432] shadow-[8px_8px_0px_#002432] hover:shadow-[12px_12px_0px_#002432] transition-all duration-300 hover:transform hover:-translate-x-1 hover:-translate-y-1 overflow-hidden group"
+                >
+                  <CardContent className="p-6 relative">
+                    {/* Background pattern */}
+                    <div className="absolute inset-0 opacity-10">
+                      <div className="absolute top-2 right-2 w-16 h-16 border-2 border-white rounded-full"></div>
+                      <div className="absolute bottom-2 left-2 w-8 h-8 bg-white/20 rounded-full"></div>
+                    </div>
+
+                    <div className="text-center text-white relative z-10">
+                      <p className="font-['Bebas_Neue_Pro-Regular',Helvetica] font-normal text-[28px] lg:text-[32px] leading-tight mb-1">
+                        {card.title}
+                      </p>
+                      <p className="font-['Bebas_Neue_Pro-Bold',Helvetica] font-bold text-[28px] lg:text-[32px] leading-tight mb-3">
+                        {card.highlight}
+                      </p>
+                      <p className="font-['Schibsted_Grotesk-Medium',Helvetica] font-medium text-sm lg:text-base leading-tight opacity-95">
+                        {card.description}
+                      </p>
+                    </div>
+
+                    {/* Hover effect overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-[#f78837]/0 to-[#f78837]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+
+            {/* Additional decorative text */}
+            <div className="text-center mt-8">
+              <p className="font-['Schibsted_Grotesk-Medium',Helvetica] text-[#002432] text-sm opacity-70">
+                Identifica-se com algum desses cenários?
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
