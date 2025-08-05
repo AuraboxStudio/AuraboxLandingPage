@@ -15,11 +15,18 @@ export default function FAQSection(): React.JSX.Element {
       ),
 
       icon: (
-        <img
-          src="/simbolo_aurabox_olho.png"
-          alt="olho"
-          className="w-[148px] h-[120px] -translate-y-10"
-        />
+        <div className="relative w-[148px] h-[120px] flex justify-center items-center">
+          <img
+            src="/Sombra.png"
+            alt="Sombra olho"
+            className="absolute w-[180px] h-[80px] bottom-0"
+          />
+          <img
+            src="/simbolo_aurabox_olho.png"
+            alt="olho"
+            className="relative w-[148px] h-[120px] -translate-y-10"
+          />
+        </div>
       ),
 
       content: (
@@ -43,11 +50,18 @@ export default function FAQSection(): React.JSX.Element {
       ),
 
       icon: (
-        <img
-          src="/simbolo_aurabox_alvo.png"
-          alt="Alvo"
-          className="w-[210px] h-[169px] translate-x-[40px] -translate-y-10"
-        />
+        <div className="relative w-[210px] h-[169px] flex justify-center items-center translate-x-[40px]">
+          <img
+            src="/Sombra.png"
+            alt="Sombra alvo"
+            className="absolute w-[200px] h-[80px] bottom-0"
+          />
+          <img
+            src="/simbolo_aurabox_alvo.png"
+            alt="Alvo"
+            className="relative w-[210px] h-[169px] -translate-y-10"
+          />
+        </div>
       ),
 
       content: (
@@ -77,11 +91,18 @@ export default function FAQSection(): React.JSX.Element {
       ),
 
       icon: (
-        <img
-          src="/icone_aurabox_megafone.png"
-          alt="megafone"
-          className="w-[159px] h-[137px] -translate-y-10"
-        />
+        <div className="relative w-[159px] h-[137px] flex justify-center items-center">
+          <img
+            src="/Sombra2.png"
+            alt="Sombra megafone"
+            className="absolute w-[160px] h-[60px] bottom-0"
+          />
+          <img
+            src="/icone_aurabox_megafone.png"
+            alt="megafone"
+            className="relative w-[159px] h-[137px] -translate-y-10"
+          />
+        </div>
       ),
 
       content: (
