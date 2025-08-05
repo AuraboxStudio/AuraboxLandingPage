@@ -6,43 +6,76 @@ import React from "react";
 export default function FAQSection(): React.JSX.Element {
   const benefits = [
     {
-      title: "CONCRETIZE\nSUA MARCA",
-      icon: <img src="/simbolo_aurabox_olho.png" alt="olho" className="w-[64px] h-[64px]" />,
+      title: (
+        <div className="font-sans font-black text-white text-[32px] text-center tracking-[0] leading-[normal] h-20">
+          {"CONCRETIZE\nSUA MARCA".split("\n").map((line, i) => (
+            <div key={i}>{line}</div>
+          ))}
+        </div>
+      ),
+      icon: <img src="/simbolo_aurabox_olho.png" alt="olho" className="w-[148px] h-[120px]" />,
       content: (
-        <>
-          <span>Marcas fortes se constroem com </span>
-          <strong>consistência</strong>. Empresas com agências especializadas crescem até <strong>2,8x mais</strong>.
-          <br />
-          <br />
-          Com estratégia alinhada aos seus valores, sua marca comunica com clareza — e se torna mais reconhecida.
-        </>
+        <div className="w-[274px]">
+          <p className="text-base text-center text-black font-medium font-sans tracking-[0] leading-normal">
+            Marcas fortes se constroem com <span className="font-bold">consistência</span>. Empresas com agências especializadas <span className="font-bold">crescem até 2,8x mais</span>.
+            <br />
+            <br />
+            Com uma equipe dedicada e estratégias alinhadas aos seus valores, sua marca comunica com clareza - e se torna mais reconhecida.
+          </p>
+        </div>
+        )
+    },
+    {
+      title: (
+        <div className="font-sans font-black text-white text-[32px] text-center tracking-[0] leading-[normal] h-20">
+          {"FOQUE NO\nQUE IMPORTA".split("\n").map((line, i) => (
+            <div key={i}>{line}</div>
+          ))}
+        </div>
+      ),
+      icon: <img src="/simbolo_aurabox_alvo.png" alt="Alvo" className="w-[210px] h-[169px]" />,
+      content: (
+        <div className="w-[274px]">
+          <p className="text-base text-center text-black font-medium font-sans tracking-[0] leading-normal">
+            <span className="font-medium">Ao contar com uma </span>
+            <strong className="font-bold">agência especializada</strong>
+            <span className="font-medium">
+              , sua equipe pode focar no que faz de melhor: gerir o negócio.
+              <br />
+              <br />
+              Cuidamos da comunicação da sua marca — gerando{" "}
+            </span>
+            <strong className="font-bold">eficiência e resultados</strong>
+            <span className="font-medium">.</span>
+          </p>
+        </div>
       ),
     },
     {
-      title: "FOQUE NO\nQUE IMPORTA",
-      icon: <img src="/simbolo_aurabox_alvo.png" alt="Alvo" className="w-[64px] h-[64px]" />,
-      content: (
-        <>
-          <span>Com uma </span>
-          <strong>agência especializada</strong>, sua equipe pode focar no que faz de melhor.
-          <br />
-          <br />
-          Cuidamos da comunicação com dedicação e profissionalismo — gerando <strong>eficiência e resultados</strong>.
-        </>
+      title: (
+        <div className="font-sans font-black text-white text-[32px] text-center tracking-[0] leading-[normal] h-20">
+          {"DESCOMPLIQUE\nA COMUNICAÇÃO".split("\n").map((line, i) => (
+            <div key={i}>{line}</div>
+          ))}
+        </div>
       ),
-    },
-    {
-      title: "DESCOMPLIQUE\nA COMUNICAÇÃO",
-      icon: <img src="/icone_aurabox_megafone.png" alt="megafone" className="w-[64px] h-[64px]" />,
+      icon: <img src="/icone_aurabox_megafone.png" alt="megafone" className="w-[159px] h-[137px]" />,
       content: (
-        <>
-          <span>Somos </span>
-          <strong>especialistas</strong> em Marketing All-Inclusive.
-          <br />
-          <br />
-          Cuidamos de tudo — inteligência de mercado, branding, mídia — com <strong>clareza e integração</strong>.
-        </>
+        <p className="font-sans text-base text-center text-black">
+          <span className="font-medium">Somos </span>
+          <span className="font-bold">especialistas</span>
+          <span className="font-medium"> em </span>
+          <span className="font-bold">Marketing All-Inclusive</span>
+          <span className="font-medium">, cuidando de toda a comunicação da sua marca - da inteligência de mercado ao branding, da estratégia à veiculação.
+            <br />
+            <br />
+            Com uma equipe integrada, você reduz retrabalho, evita ruídos e foca no que realmente importa:{" "}
+          </span>
+          <span className="font-bold">fazer seu negócio crescer</span>
+          <span className="font-medium">.</span>
+        </p>
       ),
+
     },
   ];
 
@@ -50,9 +83,15 @@ export default function FAQSection(): React.JSX.Element {
     <section className="py-24 bg-[#DFE5E5] text-[#002432]">
       <div className="max-w-[1340px] mx-auto px-4">
         <div className="bg-gradient-to-br from-[#0f4c5c] to-[#26c7b7] rounded-[40px] px-6 py-16">
-          <h2 className="text-center text-[32px] md:text-[40px] font-['Bebas_Neue_Pro-Bold'] text-[#002432] mb-16">
-            BENEFICIOS DA AURABOX
-          </h2>
+          <div className="flex justify-center mb-16">
+            <div className="relative">
+              <div className="bg-[#26c7b7] text-white px-8 py-3 rounded-[25px] border-[5px] border-solid border-[#002432] shadow-[-10px_10px_0px_#002432]">
+                <h2 className="[font-family:'Bebas_Neue_Pro-Bold',Helvetica] font-bold text-white text-[40px] text-center tracking-[0] leading-[normal] whitespace-nowrap">
+                  BENEFÍCIOS DA AURABOX
+                </h2>
+              </div>
+            </div>
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {benefits.map((item, idx) => (
@@ -73,7 +112,7 @@ export default function FAQSection(): React.JSX.Element {
             ))}
           </div>
 
-          <p className="text-xs text-center mt-10 italic text-[#002432] opacity-60">
+          <p className="text-xs text-center mt-10 italic text-white opacity-60">
             *McKinsey & Company, pesquisa 2025.
           </p>
 

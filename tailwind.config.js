@@ -7,16 +7,11 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        "standard-text": "var(--standard-text-font-family)",
-        sans: [
-          "ui-sans-serif",
-          "system-ui",
-          "sans-serif",
-          '"Apple Color Emoji"',
-          '"Segoe UI Emoji"',
-          '"Segoe UI Symbol"',
-          '"Noto Color Emoji"',
-        ],
+        // Fonte padrão do projeto
+        sans: ['Schibsted_Grotesk', 'sans-serif'],
+
+        // Fonte secundária para títulos ou destaques
+        'bebas-nue-pro': ['Bebas_nue_Pro', 'sans-serif'],
       },
       boxShadow: {
         "caixa-azul": "var(--caixa-azul)",
@@ -77,7 +72,13 @@ module.exports = {
         "accordion-up": "accordion-up 0.2s ease-out",
       },
     },
-    container: { center: true, padding: "2rem", screens: { "2xl": "1400px" } },
+    container: {
+      center: true,
+      padding: "2rem",
+      screens: {
+        "2xl": "1400px",
+      },
+    },
   },
   plugins: [],
   darkMode: ["class"],
