@@ -1,127 +1,45 @@
 // components/sections/FAQSection.tsx
 import { Card, CardContent } from "../ui/card";
-import { Star } from "lucide-react";
 import React from "react";
 
 export default function FAQSection(): React.JSX.Element {
   const benefits = [
     {
-      title: (
-        <div className="font-sans font-black text-white text-[32px] text-center tracking-[0] leading-[normal] h-20">
-          {"CONCRETIZE\nSUA MARCA".split("\n").map((line, i) => (
-            <div key={i}>{line}</div>
-          ))}
-        </div>
-      ),
-
-      icon: (
-        <div className="relative w-[148px] h-[120px] flex justify-center items-center">
-          <img
-            src="/Sombra.png"
-            alt="Sombra olho"
-            className="absolute bottom-[-10px] left-[0px] w-[140px] h-auto"
-          />
-          <img
-            src="/simbolo_aurabox_olho.png"
-            alt="olho"
-            className="relative w-[148px] h-[120px] -translate-y-10"
-          />
-        </div>
-      ),
-
+      title: "CONCRETIZE\nSUA MARCA",
+      icon: "/simbolo_aurabox_olho.png",
+      sombra: "/Sombra.png",
       content: (
-        <div className="w-[274px]">
-          <p className="text-base text-center text-black font-medium font-sans tracking-[0] leading-normal">
-            Marcas fortes se constroem com <span className="font-bold">consistência</span>. Empresas com agências especializadas <span className="font-bold">crescem até 2,8x mais</span>.
-            <br />
-            <br />
-            Com uma equipe dedicada e estratégias alinhadas aos seus valores, sua marca comunica com clareza - e se torna mais reconhecida.
-          </p>
-        </div>
-        )
+        <>
+          Marcas fortes se constroem com <strong>consistência</strong>. Empresas com agências especializadas <strong>crescem até 2,8x mais</strong>.
+          <br /><br />
+          Com uma equipe dedicada e estratégias alinhadas aos seus valores, sua marca comunica com clareza – e se torna mais reconhecida.
+        </>
+      )
     },
     {
-      title: (
-        <div className="font-sans font-black text-white text-[32px] text-center tracking-[0] leading-[normal] h-20">
-          {"FOQUE NO\nQUE IMPORTA".split("\n").map((line, i) => (
-            <div key={i}>{line}</div>
-          ))}
-        </div>
-      ),
-
-      icon: (
-        <div className="relative w-[210px] h-[169px] flex justify-center items-center translate-x-[40px]">
-          <img
-            src="/Sombra.png"
-            alt="Sombra alvo"
-            className="absolute bottom-[20px] left-[-10px] w-[140px] h-auto"
-          />
-          <img
-            src="/simbolo_aurabox_alvo.png"
-            alt="Alvo"
-            className="relative w-[210px] h-[169px] -translate-y-10"
-          />
-        </div>
-      ),
-
+      title: "FOQUE NO\nQUE IMPORTA",
+      icon: "/simbolo_aurabox_alvo.png",
+      sombra: "/Sombra.png",
       content: (
-        <div className="w-[274px]">
-          <p className="text-base text-center text-black font-medium font-sans tracking-[0] leading-normal">
-            <span className="font-medium">Ao contar com uma </span>
-            <strong className="font-bold">agência especializada</strong>
-            <span className="font-medium">
-              , sua equipe pode focar no que faz de melhor: gerir o negócio.
-              <br />
-              <br />
-              Cuidamos da comunicação da sua marca — gerando{" "}
-            </span>
-            <strong className="font-bold">eficiência e resultados</strong>
-            <span className="font-medium">.</span>
-          </p>
-        </div>
-      ),
+        <>
+          Ao contar com uma <strong>agência especializada</strong>, sua equipe pode focar no que faz de melhor: gerir o negócio.
+          <br /><br />
+          Cuidamos da comunicação da sua marca — gerando <strong>eficiência e resultados</strong>.
+        </>
+      )
     },
     {
-      title: (
-        <div className="font-sans font-black text-white text-[32px] text-center tracking-[0] leading-[normal] h-20">
-          {"DESCOMPLIQUE\nA COMUNICAÇÃO".split("\n").map((line, i) => (
-            <div key={i}>{line}</div>
-          ))}
-        </div>
-      ),
-
-      icon: (
-        <div className="relative w-[159px] h-[137px] flex justify-center items-center">
-          <img
-            src="/Sombra2.png"
-            alt="Sombra megafone"
-            className="absolute bottom-[2px] left-[4px] w-[180px] h-auto"
-          />
-          <img
-            src="/icone_aurabox_megafone.png"
-            alt="megafone"
-            className="relative w-[159px] h-[137px] -translate-y-10"
-          />
-        </div>
-      ),
-
+      title: "DESCOMPLIQUE\nA COMUNICAÇÃO",
+      icon: "/icone_aurabox_megafone.png",
+      sombra: "/Sombra2.png",
       content: (
-        <p className="font-sans text-base text-center text-black">
-          <span className="font-medium">Somos </span>
-          <span className="font-bold">especialistas</span>
-          <span className="font-medium"> em </span>
-          <span className="font-bold">Marketing All-Inclusive</span>
-          <span className="font-medium">, cuidando de toda a comunicação da sua marca - da inteligência de mercado ao branding, da estratégia à veiculação.
-            <br />
-            <br />
-            Com uma equipe integrada, você reduz retrabalho, evita ruídos e foca no que realmente importa:{" "}
-          </span>
-          <span className="font-bold">fazer seu negócio crescer</span>
-          <span className="font-medium">.</span>
-        </p>
-      ),
-
-    },
+        <>
+          Somos <strong>especialistas</strong> em <strong>Marketing All-Inclusive</strong>, cuidando de toda a comunicação da sua marca – da inteligência de mercado ao branding, da estratégia à veiculação.
+          <br /><br />
+          Com uma equipe integrada, você reduz retrabalho, evita ruídos e foca no que realmente importa: <strong>fazer seu negócio crescer</strong>.
+        </>
+      )
+    }
   ];
 
   return (
@@ -144,12 +62,26 @@ export default function FAQSection(): React.JSX.Element {
                 key={idx}
                 className="rounded-[30px] p-6 bg-gradient-to-br from-[#f78837] to-[#ff9d4a] text-white shadow-lg relative"
               >
-                <div className="flex justify-center -mt-16 mb-4">{item.icon}</div>
+                <div className="flex justify-center -mt-16 mb-4">
+                  <div className="relative w-[180px] h-[160px] flex justify-center items-center mx-auto">
+                    <img
+                      src={item.sombra}
+                      alt="Sombra"
+                      className="absolute bottom-[10px] w-[140px]"
+                    />
+                    <img
+                      src={item.icon}
+                      alt="Ícone"
+                      className="relative w-[148px] h-[120px]"
+                    />
+                  </div>
+                </div>
+
                 <CardContent>
-                  <h3 className="text-xl md:text-2xl font-black font-['Schibsted_Grotesk-Black'] whitespace-pre-line mb-4 text-center">
+                  <h3 className="text-[32px] min-h-[80px] flex flex-col justify-center font-black text-white text-center leading-[normal] font-sans whitespace-pre-line mb-4">
                     {item.title}
                   </h3>
-                  <p className="text-base leading-relaxed font-medium font-['Schibsted_Grotesk-Medium']">
+                  <p className="text-base leading-relaxed text-black font-medium font-sans text-center">
                     {item.content}
                   </p>
                 </CardContent>
