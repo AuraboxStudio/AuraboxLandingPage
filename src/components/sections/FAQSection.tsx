@@ -13,7 +13,15 @@ export default function FAQSection(): React.JSX.Element {
           ))}
         </div>
       ),
-      icon: <img src="/simbolo_aurabox_olho.png" alt="olho" className="w-[148px] h-[120px]" />,
+
+      icon: (
+        <img
+          src="/simbolo_aurabox_olho.png"
+          alt="olho"
+          className="w-[148px] h-[120px] -translate-y-10"
+        />
+      ),
+
       content: (
         <div className="w-[274px]">
           <p className="text-base text-center text-black font-medium font-sans tracking-[0] leading-normal">
@@ -33,7 +41,15 @@ export default function FAQSection(): React.JSX.Element {
           ))}
         </div>
       ),
-      icon: <img src="/simbolo_aurabox_alvo.png" alt="Alvo" className="w-[210px] h-[169px]" />,
+
+      icon: (
+        <img
+          src="/simbolo_aurabox_alvo.png"
+          alt="Alvo"
+          className="w-[210px] h-[169px] translate-x-[40px] -translate-y-10"
+        />
+      ),
+
       content: (
         <div className="w-[274px]">
           <p className="text-base text-center text-black font-medium font-sans tracking-[0] leading-normal">
@@ -59,7 +75,15 @@ export default function FAQSection(): React.JSX.Element {
           ))}
         </div>
       ),
-      icon: <img src="/icone_aurabox_megafone.png" alt="megafone" className="w-[159px] h-[137px]" />,
+
+      icon: (
+        <img
+          src="/icone_aurabox_megafone.png"
+          alt="megafone"
+          className="w-[159px] h-[137px] -translate-y-10"
+        />
+      ),
+
       content: (
         <p className="font-sans text-base text-center text-black">
           <span className="font-medium">Somos </span>
@@ -84,7 +108,7 @@ export default function FAQSection(): React.JSX.Element {
       <div className="max-w-[1340px] mx-auto px-4">
         <div className="bg-gradient-to-br from-[#0f4c5c] to-[#26c7b7] rounded-[40px] px-6 py-16">
           <div className="flex justify-center mb-16">
-            <div className="relative">
+            <div className="relative -translate-y-10">
               <div className="bg-[#26c7b7] text-white px-8 py-3 rounded-[25px] border-[5px] border-solid border-[#002432] shadow-[-10px_10px_0px_#002432]">
                 <h2 className="[font-family:'Bebas_Neue_Pro-Bold',Helvetica] font-bold text-white text-[40px] text-center tracking-[0] leading-[normal] whitespace-nowrap">
                   BENEFÍCIOS DA AURABOX
