@@ -16,8 +16,8 @@ export default function CallToActionSection(): React.JSX.Element {
           Solicite seu orçamento personalizado e descubra como podemos impulsionar sua marca.
         </p>
 
-        {/* Bloco com borda azul e sombra no estilo BenefitsSection */}
-        <div className="rounded-[30px] border-[3px] border-[#002432] shadow-[6px_6px_0px_#002432] hover:shadow-[10px_10px_0px_#002432] bg-white p-8 transition-all duration-300 hover:-translate-x-1 hover:-translate-y-1">
+        {/* Bloco com borda azul e sombra fixa */}
+        <div className="rounded-[30px] border-[3px] border-[#002432] shadow-[6px_6px_0px_#002432] bg-white p-8">
           <div className="flex flex-col lg:flex-row gap-4 mb-6">
             <div className="relative flex-1">
               <User className="absolute left-4 top-1/2 transform -translate-y-1/2 text-[#a7a7aa] w-5 h-5" />
@@ -36,13 +36,16 @@ export default function CallToActionSection(): React.JSX.Element {
             </div>
           </div>
 
-          <Button className="w-full h-[64px] bg-gradient-to-r from-[#f78837] to-[#ff9d4a] hover:from-[#e67827] hover:to-[#f08d3a] text-[#002432] font-bold text-lg rounded-full shadow-md relative">
-            <div className="absolute left-6 flex items-center justify-center w-10 h-10 rounded-full bg-white/20">
-              <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
-                <DollarSign className="w-4 h-4 text-[#002432]" />
+          {/* Botão com contorno e efeito de levantar */}
+          <Button className="relative w-[653px] h-[60px] bg-[#1CD8C9] hover:bg-[#1CD8C9]/90 border-[3px] border-[#002432] rounded-full text-black shadow-[6px_6px_0px_#002432] hover:shadow-[10px_10px_0px_#002432] transition-all duration-300 hover:-translate-x-1 hover:-translate-y-1 mx-auto">
+            <div className="absolute left-4 w-10 h-10 rounded-full border-2 border-white flex items-center justify-center bg-transparent">
+              <div className="w-[33px] h-[33px] rounded-full bg-white flex items-center justify-center">
+                <DollarSign className="w-4 h-5 text-[#1CD8C9]" />
               </div>
             </div>
-            <span className="ml-8">Solicitar meu orçamento</span>
+            <span className="font-['Schibsted_Grotesk-Bold',Helvetica] font-bold text-xl">
+              Solicitar meu orçamento
+            </span>
           </Button>
 
           <div className="flex items-center justify-center gap-2 pt-4 text-sm text-[#002432] opacity-80">

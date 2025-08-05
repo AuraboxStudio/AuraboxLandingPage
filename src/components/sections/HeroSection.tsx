@@ -30,9 +30,18 @@ const HeroSection: React.FC = () => {
                 className="h-[50px] px-4 rounded-full bg-[#f5f5f5] border border-[#c1c1c1] text-sm"
               />
             </div>
-            <Button className="w-full sm:w-[300px] h-[56px] rounded-full bg-gradient-to-r from-[#26c7b7] to-[#003d56] text-white font-bold text-lg shadow-md">
-              Solicitar meu orçamento
+
+            <Button className="relative w-full sm:max-w-[500px] h-[50px] bg-[#1CD8C9] hover:bg-[#1CD8C9]/90 border-[3px] border-[#002432] rounded-full text-black shadow-[6px_6px_0px_#002432] hover:shadow-[10px_10px_0px_#002432] transition-all duration-300 hover:-translate-x-1 hover:-translate-y-1 mx-auto">
+              <div className="absolute left-4 w-10 h-10 rounded-full border-2 border-white flex items-center justify-center bg-transparent">
+                <div className="w-[33px] h-[33px] rounded-full bg-white flex items-center justify-center">
+                  <DollarSign className="w-4 h-5 text-[#1CD8C9]" />
+                </div>
+              </div>
+              <span className="font-['Schibsted_Grotesk-Bold',Helvetica] font-bold text-xl">
+                Solicitar meu orçamento
+              </span>
             </Button>
+
             <p className="text-sm text-[#002432]">
               Seus dados estão protegidos pela <strong className="font-extrabold">Lei Geral de Proteção de Dados</strong>.
             </p>
