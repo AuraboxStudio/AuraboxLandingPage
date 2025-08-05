@@ -16,11 +16,7 @@ export default function FAQSection(): React.JSX.Element {
 
       icon: (
         <div className="relative w-[148px] h-[120px] flex justify-center items-center">
-          <img
-            src="/Sombra.png"
-            alt="Sombra olho"
-            className="absolute w-[180px] h-[80px] bottom-0"
-          />
+          <div className="absolute bottom-[18px] left-[8px] w-[148px] h-[24px] bg-[#d76519] rounded-full rotate-[-25deg] skew-x-12 opacity-70"></div>
           <img
             src="/simbolo_aurabox_olho.png"
             alt="olho"
@@ -51,11 +47,7 @@ export default function FAQSection(): React.JSX.Element {
 
       icon: (
         <div className="relative w-[210px] h-[169px] flex justify-center items-center translate-x-[40px]">
-          <img
-            src="/Sombra.png"
-            alt="Sombra alvo"
-            className="absolute w-[200px] h-[80px] bottom-0"
-          />
+          <div className="absolute bottom-[10px] left-[28px] w-[110px] h-[26px] bg-[#d76519] rounded-full rotate-[-25deg] opacity-70"></div>
           <img
             src="/simbolo_aurabox_alvo.png"
             alt="Alvo"
@@ -92,11 +84,7 @@ export default function FAQSection(): React.JSX.Element {
 
       icon: (
         <div className="relative w-[159px] h-[137px] flex justify-center items-center">
-          <img
-            src="/Sombra2.png"
-            alt="Sombra megafone"
-            className="absolute w-[160px] h-[60px] bottom-0"
-          />
+          <div className="absolute bottom-[6px] left-[22px] w-[100px] h-[24px] bg-[#d76519] rounded-full rotate-[-25deg] opacity-70"></div>
           <img
             src="/icone_aurabox_megafone.png"
             alt="megafone"
