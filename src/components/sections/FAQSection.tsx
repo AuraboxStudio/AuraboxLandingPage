@@ -6,7 +6,7 @@ export default function FAQSection(): React.JSX.Element {
   const benefits = [
     {
       title: "CONCRETIZE\nSUA MARCA",
-      icon: "/simbolo_aurabox_olho.png",
+      icon: "/icone_aurabox_olho.png",
       sombra: "/Sombra.png",
       content: (
         <>
@@ -18,7 +18,7 @@ export default function FAQSection(): React.JSX.Element {
     },
     {
       title: "FOQUE NO\nQUE IMPORTA",
-      icon: "/simbolo_aurabox_alvo.png",
+      icon: "/icone_aurabox_alvo.png",
       sombra: "/Sombra.png",
       content: (
         <>
@@ -64,21 +64,41 @@ export default function FAQSection(): React.JSX.Element {
               >
                 <div className="flex justify-center -mt-16 mb-4">
                   <div className="relative w-[180px] h-[160px] flex justify-center items-center mx-auto">
+
                     <img
                       src={item.sombra}
                       alt="Sombra"
-                      className="absolute bottom-[10px] w-[140px]"
+                      className={`absolute ${
+                        item.icon === "/icone_aurabox_alvo.png"
+                          ? "bottom-[20px] w-[120px] translate-x-[4px]"
+                          : item.icon === "/icone_aurabox_alvo.png"
+                            ? "bottom-[15px] w-[110px] translate-x-[4px]"
+                            : item.icon === "/icone_aurabox_olho.png"
+                              ? "bottom-[15px] w-[120px]"
+                              : "bottom-[11px] w-[140px]"
+                      }`}
                     />
+
                     <img
                       src={item.icon}
                       alt="Ícone"
-                      className="relative w-[148px] h-[120px]"
+                      className={`relative ${
+                        item.icon === "/icone_aurabox_alvo.png"
+                          ? "w-[250px] h-[150px] -mt-[86px] translate-x-[30px]"
+                          : item.icon === "/icone_aurabox_alvo.png"
+                            ? "w-[180px] h-[145px] -mt-[100px] translate-x-[32px]"
+                          : item.icon === "/icone_aurabox_megafone.png"
+                            ? "w-[159px] h-[137px] -mt-[90px]" // <-- correção aplicada aqui
+                            : "w-[148px] h-[120px] -mt-[90px]"
+                      }`}
                     />
+
+
                   </div>
                 </div>
 
                 <CardContent>
-                  <h3 className="text-[32px] min-h-[80px] flex flex-col justify-center font-black text-white text-center leading-[normal] font-sans whitespace-pre-line mb-4">
+                  <h3 className="text-[32px] min-h-[80px] flex flex-col justify-center font-black text-white text-center leading-[normal] font-sans whitespace-pre-line mb-2 -mt-12">
                     {item.title}
                   </h3>
                   <p className="text-base leading-relaxed text-black font-medium font-sans text-center">
