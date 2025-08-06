@@ -58,15 +58,143 @@ export default function CallToActionSection() {
         <p>
           6. Áreas específicas deste site podem estar restritas ao acesso do usuário, e a Aurabox Studio pode restringir ainda mais o acesso a qualquer área do site, a qualquer momento e a seu exclusivo critério. Qualquer identificação de usuário, senha ou outra informação que você possua neste site é confidencial, e você deve manter a confidencialidade.
         </p>
+
+        <h4 className="font-bold mt-6">6. Áreas Restritas</h4>
+
+        <p>
+          Áreas específicas deste site podem ser restritas ao acesso do usuário, e a Aurabox Studio pode estender essa restrição a todo o site, a qualquer momento e a seu exclusivo critério. Qualquer identificação de usuário, chave de segurança ou senha que você possua neste site é confidencial, sendo de sua responsabilidade mantê-las em sigilo.
+        </p>
+
+        <h4 className="font-bold mt-6">Links e Hyperlinks</h4>
+        <p>
+          7. A Aurabox Studio reserva-se o direito de solicitar a remoção de qualquer link criado por terceiros que redirecione para este site, e o usuário concorda em atender prontamente a tal solicitação. Ao continuar conectado ao nosso site, você concorda com os termos desta política de links.
+        </p>
+        <p>
+          8. Podemos alterar os termos e condições desses direitos de vinculação a qualquer momento. Ao conectar-se continuamente ao nosso site, você concorda em se comprometer e seguir os termos desta política de links.
+        </p>
+
+        <h4 className="font-bold mt-6">Link para conteúdo de Terceiros</h4>
+        <p>
+          9. Este site pode conter links para sites ou aplicativos operados por terceiros. A Aurabox Studio não controla, endossa ou se responsabiliza por esses sites, aplicativos, seus conteúdos ou disponibilidade. O acesso a tais serviços de terceiros é feito por conta e risco do usuário, sendo o fornecedor terceirizado o único responsável por eventuais produtos ou serviços ofertados.
+        </p>
+
+        <h4 className="font-bold mt-6">Conteúdo do Usuário</h4>
+        <p>
+          10. “Conteúdo do Usuário” refere-se a qualquer áudio, vídeo, texto, imagem ou outro material que você decida exibir neste site. Ao publicar esse conteúdo, você concede à Aurabox Studio uma licença não exclusiva, mundial, irrevogável, isenta de royalties e sublicenciável para usar, reproduzir, adaptar, publicar, traduzir e distribuir esse conteúdo em qualquer mídia. O conteúdo deve ser de sua autoria e não pode infringir os direitos de terceiros. A Aurabox Studio reserva-se o direito de monitorar e remover qualquer conteúdo considerado inadequado, ofensivo ou ilegal.
+        </p>
+
+        <h4 className="font-bold mt-6">Solicitação de Orçamento</h4>
+        <p>
+          11. A Aurabox Studio disponibiliza, por meio deste site, um canal de contato para que os usuários possam enviar solicitações de orçamento. Ao preencher e enviar o formulário, o usuário declara que as informações fornecidas são verdadeiras e completas.
+        </p>
+        <p>
+          12. A Aurabox Studio compromete-se a analisar e responder às solicitações de orçamento no prazo de até 15 (quinze) dias corridos. Caso não haja resposta nesse período, a empresa reserva-se o direito de não responder e isenta-se de qualquer obrigação legal de retorno.
+        </p>
+        <p>
+          13. A Aurabox Studio poderá recusar ou ignorar, a seu exclusivo critério, solicitações que contenham informações falsas, linguagem ofensiva, ou que violem os presentes Termos, a legislação vigente ou interesses nossos. Nestes casos, a empresa não assume obrigação de justificar ou responder ao solicitante.
+        </p>
+
+        <h4 className="font-bold mt-6">Política de Privacidade</h4>
+        <p>
+          14. Ao acessar este site, determinadas informações sobre o usuário poderão ser coletadas, como endereço IP, tempo de navegação, software utilizado, entre outras. Dados pessoais como nome, e-mail e telefone também poderão ser coletados com finalidades estatísticas e de relacionamento. Tais dados serão tratados conforme a legislação vigente, em conformidade com a Lei Geral de Proteção de Dados (LGPD).
+        </p>
+
+        <h4 className="font-bold mt-6">Tratamento de Dados Pessoais e Política de Privacidade</h4>
+
+        <p>
+          15. Ao aceitar estes Termos de Uso, o usuário manifesta seu consentimento para que a Aurabox Studio colete, armazene, trate e utilize os dados pessoais fornecidos voluntariamente, para fins de:
+        </p>
+
+        <ul className="list-disc list-inside ml-4 space-y-1">
+          <li>Envio de comunicações institucionais e campanhas de marketing;</li>
+          <li>Ações de relacionamento e publicidade personalizada;</li>
+          <li>Análise estatística e melhoria de serviços;</li>
+          <li>Resposta a contatos e solicitações comerciais;</li>
+        </ul>
+
+        <p>
+          16. O tratamento dos dados ocorre com base no consentimento do titular (art. 7º, I da LGPD), podendo ser revogado a qualquer momento mediante solicitação ao e-mail: contato@aurabox.com.
+        </p>
+
+        <p>
+          17. Os dados poderão ser compartilhados com parceiros terceiros que prestam serviços de hospedagem, CRM e automação, mediante contrato de confidencialidade e observância da LGPD.
+        </p>
+
+        <p>
+          18. A Aurabox Studio adota medidas técnicas razoáveis para proteção dos dados. Não obstante, não se responsabiliza por vazamentos decorrentes de falhas de terceiros, ataques externos ou eventos fora de seu controle direto, desde que não haja dolo ou culpa direta da empresa.
+        </p>
+
+        <p>
+          19. O usuário poderá exercer os direitos previstos no art. 18 da LGPD, como acesso, correção, exclusão, revogação do consentimento e portabilidade, mediante solicitação ao e-mail informado.
+        </p>
+
+        <p>
+          20. O site é fornecido, com todas as responsabilidades e não assume compromissos, representações ou garantias expressas ou implícitas de qualquer tipo relacionada a este site ou ao conteúdo nele contido. A Aurabox Studio exime-se de toda e qualquer responsabilidade por perdas e danos de qualquer espécie, inclusive lucros cessantes, que decorram do uso ou da impossibilidade de uso do referido site, sendo o risco de utilização integralmente assumido pelo usuário.
+        </p>
+
+        <h4 className="font-bold mt-6">Indenização</h4>
+        <p>
+          21. O usuário concorda em indenizar a Aurabox Studio e suas afiliadas por qualquer prejuízo decorrente da utilização indevida deste site ou do descumprimento destes Termos.
+        </p>
+
+        <p>
+          22. A Aurabox Studio reserva-se o direito de, sem aviso prévio, restringir ou encerrar o acesso de qualquer usuário que descumpra estes Termos ou a legislação vigente.
+        </p>
+
+        <h4 className="font-bold mt-6">Disposições Gerais</h4>
+
+        <p>
+          23. Estes Termos serão regidos pelas leis brasileiras, elegendo-se o foro da Comarca de Goiânia/GO para dirimir quaisquer controvérsias.
+        </p>
+
+        <p>
+          24. A Aurabox Studio pode revisar os Termos de Uso a qualquer tempo, sendo responsabilidade do usuário consultá-los periodicamente.
+        </p>
+
+        <p>
+          25. A Aurabox Studio reserva-se o direito de ceder, transferir e subcontratar seus direitos e/ou obrigações sob este Acordo sem qualquer notificação ou consentimento prévio necessário. Os usuários não terão permissão para atribuir, transferir ou subcontratar qualquer um de seus direitos e/ou obrigações sob estes Termos.
+        </p>
+
+        <p>
+          26. Estes Termos representam o acordo integral entre a Aurabox Studio e o usuário. Caso alguma cláusula seja considerada inválida, isso não prejudicará qualquer disposição nele contida.
+        </p>
+
+        <p className="mt-4">
+          27. Em caso de dúvidas, entre em contato pelo e-mail:{" "}
+          <a href="mailto:comercial@auraboxstudio.com" className="underline text-[#1CD8C9] hover:text-[#0daaa0]">
+            comercial@auraboxstudio.com
+          </a>
+        </p>
+
       </div>
     ),
 
     cookies: (
       <div className="text-[#002432] text-sm space-y-4 w-full max-w-none">
+
         <h3 className="text-xl font-bold text-[#26c7b7]">Política de Cookies – Aurabox Studio</h3>
+
         <p className="text-xs text-right italic text-gray-500">Última atualização: 01/07/2023</p>
+
         <h4 className="font-bold">1. INTRODUÇÃO</h4>
-        <p>Esta Política explica como usamos cookies e tecnologias similares...</p>
+
+        <p>Esta Política de Cookies explica como a Aurabox Studio utiliza cookies e tecnologias similares para reconhecer o usuário quando visita seu site. A presente política está em conformidade com a Lei nº 13.709/2018 (Lei Geral de Proteção de Dados – LGPD) e demais normativos aplicáveis.</p>
+
+        <h4 className="font-bold">2. O QUE SÃO COOKIES?</h4>
+
+        <p>Cookies são arquivos de texto armazenados no dispositivo do usuário ao visitar um site, contendo pequenas quantidades de informações que permitem identificar preferências, hábitos de navegação e outras interações técnicas com a página acessada.</p>
+
+        <h4 className="font-bold">3. QUAIS COOKIES UTILIZAMOS?</h4>
+
+        <p>Abaixo estão listados os cookies utilizados, divididos por categorias conforme sua finalidade.</p>
+
+        <h5 className="font-bold">3.1.Cookies Essenciais</h5>
+
+        <h5 className="font-bold">3.2.Cookies de Autenticação</h5>
+
+        <h5 className="font-bold">3.3.Cookies de Desempenho e Estatísticas</h5>
+
+        
       </div>
     ),
   };
@@ -154,26 +282,28 @@ export default function CallToActionSection() {
       {/* Modal */}
       {modalOpen && (
         <div
-          className="fixed inset-0 backdrop-blur-sm bg-white/30 flex items-center justify-center z-50"
+          className="fixed inset-0 bg-white/20 bg-opacity-30 backdrop-blur-sm flex items-center justify-center z-50"
           onClick={() => setModalOpen(null)}
         >
           <div
-            className="bg-white rounded-lg p-6 max-w-[760px] w-full max-h-[80vh] overflow-auto relative"
+            className="bg-white rounded-lg max-w-[800px] w-full max-h-[80vh] overflow-hidden relative"
             onClick={(e) => e.stopPropagation()}
           >
-
             <button
-              className="absolute top-4 right-4 text-gray-600 hover:text-gray-900 font-bold text-2xl w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-200 transition"
+              className="absolute top-3 right-3 text-gray-600 hover:text-gray-900 font-bold text-2xl"
               onClick={() => setModalOpen(null)}
               aria-label="Fechar modal"
             >
               ×
             </button>
 
-            {modalContent[modalOpen]}
+            <div className="p-6 overflow-auto max-h-[80vh]">
+              {modalContent[modalOpen]}
+            </div>
           </div>
-        </div>
+        </div> // ✅ só esse fechamento externo
       )}
+
     </section>
   );
 }
