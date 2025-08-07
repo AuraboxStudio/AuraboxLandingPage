@@ -188,13 +188,121 @@ export default function CallToActionSection() {
 
         <p>Abaixo estão listados os cookies utilizados, divididos por categorias conforme sua finalidade.</p>
 
-        <h5 className="font-bold">3.1.Cookies Essenciais</h5>
+        <h5 className="font-bold mt-6">3.1. Cookies Essenciais</h5>
+
+        <div className="rounded-[40px] overflow-hidden mt-4">
+          {/* Cabeçalho da Tabela */}
+          <div className="bg-[#f78837] rounded-t-[40px] flex items-center py-2 px-3">
+            {[
+              { name: "Cookie", className: "flex-1" },
+              { name: "Provedor", className: "flex-1" },
+              { name: "Finalidade", className: "flex-1" },
+              { name: "Duração", className: "w-[106px]" },
+              { name: "Tipo", className: "w-[129px] text-center" },
+            ].map((item, index) => (
+              <div
+                key={index}
+                className={`${item.className} flex items-center ${item.name === "Tipo" ? "justify-center" : ""}`}
+              >
+                <div className="font-['Schibsted_Grotesk-Bold'] text-white text-sm tracking-[0] leading-normal w-fit">
+                  {item.name}
+                </div>
+              </div>
+            ))}
+          </div>
+
+
+          {/* Linhas da Tabela */}
+          <div className="bg-white divide-y divide-gray-200 rounded-b-[40px] overflow-hidden text-base text-black">
+            <div className="flex items-start p-4">
+              <div className="flex-1">cookie_consent</div>
+              <div className="flex-1">Aurabox</div>
+              <div className="flex-1">Armazena preferências de consentimento</div>
+              <div className="w-[106px]">12 meses</div>
+              <div className="w-[129px] text-center">Essencial</div>
+            </div>
+
+            <div className="flex items-start p-4">
+              <div className="flex-1">_ga</div>
+              <div className="flex-1">Google</div>
+              <div className="flex-1">Mede interações no site</div>
+              <div className="w-[106px]">2 anos</div>
+              <div className="w-[129px] text-center">Estatístico</div>
+            </div>
+
+            <div className="flex items-start p-4">
+              <div className="flex-1">_gid</div>
+              <div className="flex-1">Google</div>
+              <div className="flex-1">Distingue usuários únicos</div>
+              <div className="w-[106px]">24 horas</div>
+              <div className="w-[129px] text-center">Estatístico</div>
+            </div>
+          </div>
+        </div>
+
 
         <h5 className="font-bold">3.2.Cookies de Autenticação</h5>
 
+        {/* Tabela de Cookies */}
+        <div className="rounded-[40px] overflow-hidden mt-2">
+          <div className="flex items-start bg-[#f5f5f5] p-4 font-bold">
+            <div className="flex-1">Cookie</div>
+            <div className="flex-1">Provedor</div>
+            <div className="flex-1">Finalidade</div>
+            <div className="w-[106px]">Duração</div>
+            <div className="w-[129px] text-center">Tipo</div>
+          </div>
+          <div className="divide-y divide-gray-200 border border-t-0 rounded-b-[40px] overflow-hidden text-sm">
+            <div className="flex items-start p-4">
+              <div className="flex-1">oauth_token_*</div>
+              <div className="flex-1">Google</div>
+              <div className="flex-1">Login via conta Google (OAuth2.0)</div>
+              <div className="w-[106px]">Sessão</div>
+              <div className="w-[129px] text-center">3ª parte</div>
+            </div>
+            <div className="flex items-start p-4">
+              <div className="flex-1">g_userinfo (var.)</div>
+              <div className="flex-1">Google</div>
+              <div className="flex-1">Armazena nome, email e foto</div>
+              <div className="w-[106px]">Sessão</div>
+              <div className="w-[129px] text-center">3ª parte</div>
+            </div>
+          </div>
+        </div>
+
         <h5 className="font-bold">3.3.Cookies de Desempenho e Estatísticas</h5>
 
+        {/* Tabela de Cookies */}
+        <div className="rounded-[40px] overflow-hidden mt-2">
+          <div className="flex items-start bg-[#f5f5f5] p-4 font-bold">
+            <div className="flex-1">Cookie</div>
+            <div className="flex-1">Provedor</div>
+            <div className="flex-1">Finalidade</div>
+            <div className="w-[106px]">Duração</div>
+            <div className="w-[129px] text-center">Tipo</div>
+          </div>
+          <div className="divide-y divide-gray-200 border border-t-0 rounded-b-[40px] overflow-hidden text-sm">
+            <div className="flex items-start p-4">
+              <div className="flex-1">_ga</div>
+              <div className="flex-1">Google Analytics 4</div>
+              <div className="flex-1">Distinguir usuários únicos</div>
+              <div className="w-[106px]">2 anos</div>
+              <div className="w-[129px] text-center">3ª parte</div>
+            </div>
+            <div className="flex items-start p-4">
+              <div className="flex-1">_ga_*</div>
+              <div className="flex-1">Google Analytics 4</div>
+              <div className="flex-1">Persistência de sessão</div>
+              <div className="w-[106px]">1 ano</div>
+              <div className="w-[129px] text-center">3ª parte</div>
+            </div>
+          </div>
+        </div>
+
+        <p>Para mais informações, consulte:</p>
+
         
+
       </div>
     ),
   };
@@ -301,7 +409,7 @@ export default function CallToActionSection() {
               {modalContent[modalOpen]}
             </div>
           </div>
-        </div> // ✅ só esse fechamento externo
+        </div>
       )}
 
     </section>

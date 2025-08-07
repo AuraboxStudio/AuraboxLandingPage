@@ -10,8 +10,8 @@ const HeroSection: React.FC = () => {
       <div className="max-w-[1341px] mx-auto px-4 flex flex-col lg:flex-row gap-12 items-center">
         {/* Esquerda */}
         <div className="flex-1 space-y-6">
-          <h1 className="text-[48px] md:text-[64px] font-bebas-nue-pro font-bold leading-[0.9] text-[#002432]">
-            SOLUÇÕES FORA DA CAIXA<br />
+          <h1 className="text-[64px] md:text-[64px] font-bebas-nue-pro font-bold leading-[0.9] text-[#002432]">
+            <span className="whitespace-nowrap">SOLUÇÕES FORA DA CAIXA</span><br />
             PARA O <span className="text-[#f78837]">SEU NEGÓCIO</span>
           </h1>
 
