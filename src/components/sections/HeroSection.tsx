@@ -7,20 +7,22 @@ import React from "react";
 const HeroSection: React.FC = () => {
   return (
     <>
-      {/* Logo no topo esquerdo */}
-      <div className="w-full px-6 py-4 absolute top-0 left-0 z-50">
-        <img
-          src="/logo_aurabox_padrao.png"
-          alt="Logo Aurabox"
-          className="w-[140px] h-auto"
-        />
+      {/* Logo centralizado no container */}
+      <div className="absolute top-6 left-0 w-full z-50">
+        <div className="max-w-[1200px] mx-auto px-4">
+          <img
+            src="/logo_aurabox_padrao.png"
+            alt="Logo Aurabox"
+            className="w-[140px] h-auto"
+          />
+        </div>
       </div>
 
-      <section className="py-16 w-full relative">
+      <section className="pt-28 pb-16 w-full relative">
         <div className="max-w-[1200px] mx-auto px-4 flex flex-col lg:flex-row items-center justify-between gap-6">
           {/* Esquerda */}
           <div className="flex-1 max-w-[520px] space-y-6">
-            <h1 className="text-[48px] md:text-[56px] font-bebas-nue-pro font-bold leading-[1] text-[#002432]">
+            <h1 className="text-[32px] md:text-[40px] font-bebas-nue-pro font-bold leading-tight text-[#002432]">
               <span className="whitespace-nowrap block">
                 SOLUÇÕES FORA DA CAIXA
               </span>
