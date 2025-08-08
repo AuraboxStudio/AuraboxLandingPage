@@ -4,9 +4,14 @@ import React, { useState } from "react";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { DollarSign, Mail, Shield, User } from "lucide-react";
+import { FormularioIdentificacao } from "./FormularioIdentificacao";
 
 export default function CallToActionSection() {
-  const [modalOpen, setModalOpen] = useState<null | "termosServicos" | "cookies">(null);
+  const [modalOpen, setModalOpen] = useState<null | "termosServicos" | "cookies" | "formulario">(null);
+  const [formDataParcial, setFormDataParcial] = useState({
+    nome: "",
+    email: "",
+  });
 
   const modalContent = {
     termosServicos: (
@@ -305,6 +310,14 @@ export default function CallToActionSection() {
 
       </div>
     ),
+
+    formulario: (
+      <FormularioIdentificacao
+        nomeInicial={formDataParcial.nome}
+        emailInicial={formDataParcial.email}
+      />
+    ),
+
   };
 
   return (
@@ -325,7 +338,10 @@ export default function CallToActionSection() {
               <Input
                 className="h-[50px] pl-12 rounded-full bg-[#f5f5f5] border border-[#e0e0e0] text-sm"
                 placeholder="Nome"
+                value={formDataParcial.nome}
+                onChange={(e) => setFormDataParcial({ ...formDataParcial, nome: e.target.value })}
               />
+
             </div>
             <div className="relative flex-1">
               <Mail className="absolute left-4 top-1/2 transform -translate-y-1/2 text-[#a7a7aa] w-5 h-5" />
@@ -333,11 +349,17 @@ export default function CallToActionSection() {
                 className="h-[50px] pl-12 rounded-full bg-[#f5f5f5] border border-[#e0e0e0] text-sm"
                 placeholder="Email"
                 type="email"
+                value={formDataParcial.email}
+                onChange={(e) => setFormDataParcial({ ...formDataParcial, email: e.target.value })}
               />
+
             </div>
           </div>
 
-          <Button className="relative w-[653px] h-[60px] bg-[#1CD8C9] hover:bg-[#1CD8C9]/90 border-[3px] border-[#002432] rounded-full text-black shadow-[6px_6px_0px_#002432] hover:shadow-[10px_10px_0px_#002432] transition-all duration-300 hover:-translate-x-1 hover:-translate-y-1 mx-auto">
+          <Button
+            className="relative w-[653px] h-[60px] bg-[#1CD8C9] hover:bg-[#1CD8C9]/90 border-[3px] border-[#002432] rounded-full text-black shadow-[6px_6px_0px_#002432] hover:shadow-[10px_10px_0px_#002432] transition-all duration-300 hover:-translate-x-1 hover:-translate-y-1 mx-auto"
+            onClick={() => setModalOpen("formulario")}
+          >
             <div className="absolute left-4 w-10 h-10 rounded-full border-2 border-white flex items-center justify-center bg-transparent">
               <div className="w-[33px] h-[33px] rounded-full bg-white flex items-center justify-center">
                 <DollarSign className="w-4 h-5 text-[#1CD8C9]" />
@@ -348,6 +370,7 @@ export default function CallToActionSection() {
             </span>
           </Button>
 
+
           <div className="flex items-center justify-center gap-2 pt-4 text-sm text-[#002432] opacity-80">
             <Shield className="w-4 h-4 text-[#26c7b7]" />
             <p>
@@ -356,7 +379,6 @@ export default function CallToActionSection() {
           </div>
         </div>
 
-        {/* Corrigido: botões com barrinha entre eles */}
         <div className="text-[#002432] opacity-70 cursor-pointer mt-6 flex justify-center items-center gap-4 text-sm">
           <span
             onClick={() => setModalOpen("termosServicos")}
@@ -373,7 +395,6 @@ export default function CallToActionSection() {
           </span>
         </div>
 
-        {/* Logo e contato */}
         <div className="mt-10">
           <img
             src="/logo_aurabox_marca.png"

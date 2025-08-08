@@ -1,10 +1,19 @@
+"use client"
 // components/sections/HeroSection.tsx
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { DollarSign } from "lucide-react";
-import React from "react";
+import React, { useState } from "react";
+import { FormularioIdentificacao } from "./FormularioIdentificacao";
 
 const HeroSection: React.FC = () => {
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const [formDataParcial, setFormDataParcial] = useState({
+    nome: "",
+    email: "",
+  });
+  
   return (
     <>
       {/* Logo centralizado no container */}
@@ -36,18 +45,23 @@ const HeroSection: React.FC = () => {
             </p>
 
             <div className="space-y-4">
-              <div className="flex flex-col sm:flex-row gap-3">
-                <Input
-                  placeholder="Nome"
-                  className="h-[45px] px-4 rounded-full bg-[#f5f5f5] border border-[#c1c1c1] text-sm"
-                />
-                <Input
-                  placeholder="Email"
-                  className="h-[45px] px-4 rounded-full bg-[#f5f5f5] border border-[#c1c1c1] text-sm"
-                />
-              </div>
+              <Input
+                placeholder="Nome"
+                className="h-[45px] px-4 rounded-full bg-[#f5f5f5] border border-[#c1c1c1] text-sm"
+                value={formDataParcial.nome}
+                onChange={(e) => setFormDataParcial({ ...formDataParcial, nome: e.target.value })}
+              />
+              <Input
+                placeholder="Email"
+                className="h-[45px] px-4 rounded-full bg-[#f5f5f5] border border-[#c1c1c1] text-sm"
+                value={formDataParcial.email}
+                onChange={(e) => setFormDataParcial({ ...formDataParcial, email: e.target.value })}
+              />
 
-              <Button className="relative w-full h-[50px] bg-[#1CD8C9] hover:bg-[#1CD8C9]/90 border-[3px] border-[#002432] rounded-full text-black shadow-[6px_6px_0px_#002432] hover:shadow-[10px_10px_0px_#002432] transition-all duration-300 hover:-translate-x-1 hover:-translate-y-1">
+              <Button
+                className="relative w-full h-[50px] bg-[#1CD8C9] hover:bg-[#1CD8C9]/90 border-[3px] border-[#002432] rounded-full text-black shadow-[6px_6px_0px_#002432] hover:shadow-[10px_10px_0px_#002432] transition-all duration-300 hover:-translate-x-1 hover:-translate-y-1"
+                onClick={() => setModalOpen(true)}
+              >
                 <div className="absolute left-4 w-10 h-10 rounded-full border-2 border-white flex items-center justify-center bg-transparent">
                   <div className="w-[33px] h-[33px] rounded-full bg-white flex items-center justify-center">
                     <DollarSign className="w-4 h-5 text-[#1CD8C9]" />
@@ -105,6 +119,33 @@ const HeroSection: React.FC = () => {
             />
           </div>
         </div>
+        {modalOpen && (
+          <div
+            className="fixed inset-0 bg-white/20 bg-opacity-30 backdrop-blur-sm flex items-center justify-center z-50"
+            onClick={() => setModalOpen(false)}
+          >
+            <div
+              className="bg-white rounded-lg max-w-[800px] w-full max-h-[80vh] overflow-hidden relative"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                className="absolute top-3 right-3 text-gray-600 hover:text-gray-900 font-bold text-2xl"
+                onClick={() => setModalOpen(false)}
+                aria-label="Fechar modal"
+              >
+                ×
+              </button>
+
+              <div className="p-6 overflow-auto max-h-[80vh]">
+                <FormularioIdentificacao
+                  nomeInicial={formDataParcial.nome}
+                  emailInicial={formDataParcial.email}
+                />
+              </div>
+            </div>
+          </div>
+        )}
+
       </section>
     </>
   );

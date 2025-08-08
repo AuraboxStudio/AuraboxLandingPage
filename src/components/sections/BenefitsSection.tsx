@@ -7,8 +7,10 @@ export default function BenefitsSection(): React.JSX.Element {
     {
       title: (
         <div className="text-center tracking-[0] text-[#dfe5e5] font-bebas-nue-pro font-normal">
-          <span className="block font-normal break-words leading-tight text-lg md:text-[32px]">RESULTADOS</span>
-          <span className="block font-bebas-nue-pro font-bold break-words leading-tight text-lg md:text-[32px]">
+          <span className="block font-normal leading-tight text-lg md:text-[32px]">
+            RESULTADOS
+          </span>
+          <span className="block font-bebas-nue-pro font-bold leading-tight text-lg md:text-[32px]">
             ESTAGNADOS
           </span>
           <span className="block font-sans font-medium text-base leading-5 mt-1">
@@ -16,13 +18,15 @@ export default function BenefitsSection(): React.JSX.Element {
           </span>
         </div>
       ),
-      description: "Crescimento abaixo do potencial do mercado"
+      description: "Crescimento abaixo do potencial do mercado",
     },
     {
       title: (
         <div className="text-center tracking-[0] text-[#dfe5e5] font-bebas-nue-pro font-normal">
-          <span className="block font-normal break-words leading-tight text-lg md:text-[32px]">ROI</span>
-          <span className="block font-bebas-nue-pro font-bold break-words leading-tight text-lg md:text-[32px]">
+          <span className="block font-normal leading-tight text-lg md:text-[32px]">
+            ROI
+          </span>
+          <span className="block font-bebas-nue-pro font-bold leading-tight text-lg md:text-[32px]">
             BAIXO
           </span>
           <span className="block font-sans font-medium text-base leading-5 mt-1">
@@ -30,13 +34,15 @@ export default function BenefitsSection(): React.JSX.Element {
           </span>
         </div>
       ),
-      description: "Investimento sem retorno mensurável"
+      description: "Investimento sem retorno mensurável",
     },
     {
       title: (
         <div className="text-center tracking-[0] text-[#dfe5e5] font-bebas-nue-pro font-normal">
-          <span className="block font-normal break-words leading-tight text-lg md:text-[32px]">EQUIPE</span>
-          <span className="block font-bebas-nue-pro font-bold break-words leading-tight text-lg md:text-[32px]">
+          <span className="block font-normal leading-tight text-lg md:text-[32px]">
+            EQUIPE
+          </span>
+          <span className="block font-bebas-nue-pro font-bold leading-tight text-lg md:text-[32px] whitespace-nowrap">
             SOBRECARREGADA
           </span>
           <span className="block font-sans font-medium text-base leading-5 mt-1">
@@ -44,13 +50,15 @@ export default function BenefitsSection(): React.JSX.Element {
           </span>
         </div>
       ),
-      description: "Time interno sem foco estratégico"
+      description: "Time interno sem foco estratégico",
     },
     {
       title: (
         <div className="text-center tracking-[0] text-[#dfe5e5] font-bebas-nue-pro font-normal">
-          <span className="block font-normal break-words leading-tight text-lg md:text-[32px]">FALTA</span>
-          <span className="block font-bebas-nue-pro font-bold break-words leading-tight text-lg md:text-[32px]">
+          <span className="block font-normal leading-tight text-lg md:text-[32px]">
+            FALTA
+          </span>
+          <span className="block font-bebas-nue-pro font-bold leading-tight text-lg md:text-[32px]">
             DE DIREÇÃO
           </span>
           <span className="block font-sans font-medium text-base leading-5 mt-1">
@@ -58,7 +66,7 @@ export default function BenefitsSection(): React.JSX.Element {
           </span>
         </div>
       ),
-      description: "Ausência de estratégia digital clara"
+      description: "Ausência de estratégia digital clara",
     },
   ];
 
@@ -86,15 +94,14 @@ export default function BenefitsSection(): React.JSX.Element {
             <span className="text-[#f78837]">UMA AGÊNCIA?</span>
           </h2>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-6 justify-items-center">
             {benefitCards.map((card, index) => (
               <Card
                 key={index}
-                className="rounded-[30px] border-[3px] border-[#002432] shadow-[6px_6px_0px_#002432] hover:shadow-[10px_10px_0px_#002432] bg-gradient-to-br from-[#3ebeb3] to-[#2ea89d] text-white transition-all duration-300 hover:-translate-x-1 hover:-translate-y-1"
+                className="w-[240px] sm:w-[260px] md:w-[280px] lg:w-[300px] rounded-[30px] border-[3px] border-[#002432] shadow-[6px_6px_0px_#002432] hover:shadow-[10px_10px_0px_#002432] bg-gradient-to-br from-[#3ebeb3] to-[#2ea89d] text-white transition-all duration-300 hover:-translate-x-1 hover:-translate-y-1"
               >
-                <CardContent className="p-8 text-center min-h-[220px]">
-                  <p className="text-xl font-['Bebas_Neue_Pro-Regular']">{card.title}</p>
-                  
+                <CardContent className="p-8 text-center">
+                  {card.title}
                 </CardContent>
               </Card>
             ))}
