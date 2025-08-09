@@ -360,11 +360,12 @@ export default function CallToActionSection() {
             className="relative w-[653px] h-[60px] bg-[#1CD8C9] hover:bg-[#1CD8C9]/90 border-[3px] border-[#002432] rounded-full text-black shadow-[6px_6px_0px_#002432] hover:shadow-[10px_10px_0px_#002432] transition-all duration-300 hover:-translate-x-1 hover:-translate-y-1 mx-auto"
             onClick={() => setModalOpen("formulario")}
           >
-            <div className="absolute left-4 w-10 h-10 rounded-full border-2 border-white flex items-center justify-center bg-transparent">
-              <div className="w-[33px] h-[33px] rounded-full bg-white flex items-center justify-center">
-                <DollarSign className="w-4 h-5 text-[#1CD8C9]" />
+            <div className="absolute left-4 w-8 h-8 rounded-full flex items-center justify-center bg-[#002432]">
+              <div className="w-[22px] h-[22px] rounded-full bg-white flex items-center justify-center">
+                <DollarSign className="w-4 h-4 text-[#1CD8C9]" />
               </div>
             </div>
+
             <span className="font-['Schibsted_Grotesk-Bold',Helvetica] font-bold text-xl">
               Solicitar meu orçamento
             </span>

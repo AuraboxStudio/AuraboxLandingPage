@@ -42,7 +42,7 @@ export default function BenefitsSection(): React.JSX.Element {
           <span className="block font-normal leading-tight text-lg md:text-[32px]">
             EQUIPE
           </span>
-          <span className="block font-bebas-nue-pro font-bold leading-tight text-lg md:text-[32px] whitespace-nowrap">
+          <span className="block font-bebas-nue-pro font-bold leading-tight text-[20px] md:text-[26px] lg:text-[28px] xl:text-[30px] tracking-tight whitespace-nowrap">
             SOBRECARREGADA
           </span>
           <span className="block font-sans font-medium text-base leading-5 mt-1">
@@ -100,7 +100,7 @@ export default function BenefitsSection(): React.JSX.Element {
                 key={index}
                 className="w-[240px] sm:w-[260px] md:w-[280px] lg:w-[300px] rounded-[30px] border-[3px] border-[#002432] shadow-[6px_6px_0px_#002432] hover:shadow-[10px_10px_0px_#002432] bg-gradient-to-br from-[#3ebeb3] to-[#2ea89d] text-white transition-all duration-300 hover:-translate-x-1 hover:-translate-y-1"
               >
-                <CardContent className="p-8 text-center">
+                <CardContent className="p-8 text-center h-full flex flex-col items-center justify-center">
                   {card.title}
                 </CardContent>
               </Card>

@@ -45,28 +45,31 @@ const HeroSection: React.FC = () => {
             </p>
 
             <div className="space-y-4">
-              <Input
-                placeholder="Nome"
-                className="h-[45px] px-4 rounded-full bg-[#f5f5f5] border border-[#c1c1c1] text-sm"
-                value={formDataParcial.nome}
-                onChange={(e) => setFormDataParcial({ ...formDataParcial, nome: e.target.value })}
-              />
-              <Input
-                placeholder="Email"
-                className="h-[45px] px-4 rounded-full bg-[#f5f5f5] border border-[#c1c1c1] text-sm"
-                value={formDataParcial.email}
-                onChange={(e) => setFormDataParcial({ ...formDataParcial, email: e.target.value })}
-              />
+              <div className="flex flex-col lg:flex-row gap-4">
+                <Input
+                  placeholder="Nome"
+                  className="h-[45px] px-4 rounded-full bg-[#f5f5f5] border border-[#c1c1c1] text-sm flex-1"
+                  value={formDataParcial.nome}
+                  onChange={(e) => setFormDataParcial({ ...formDataParcial, nome: e.target.value })}
+                />
+                <Input
+                  placeholder="Email"
+                  className="h-[45px] px-4 rounded-full bg-[#f5f5f5] border border-[#c1c1c1] text-sm flex-1"
+                  value={formDataParcial.email}
+                  onChange={(e) => setFormDataParcial({ ...formDataParcial, email: e.target.value })}
+                />
+              </div>
 
               <Button
                 className="relative w-full h-[50px] bg-[#1CD8C9] hover:bg-[#1CD8C9]/90 border-[3px] border-[#002432] rounded-full text-black shadow-[6px_6px_0px_#002432] hover:shadow-[10px_10px_0px_#002432] transition-all duration-300 hover:-translate-x-1 hover:-translate-y-1"
                 onClick={() => setModalOpen(true)}
               >
-                <div className="absolute left-4 w-10 h-10 rounded-full border-2 border-white flex items-center justify-center bg-transparent">
-                  <div className="w-[33px] h-[33px] rounded-full bg-white flex items-center justify-center">
-                    <DollarSign className="w-4 h-5 text-[#1CD8C9]" />
+                <div className="absolute left-4 w-8 h-8 rounded-full flex items-center justify-center bg-[#002432]">
+                  <div className="w-[22px] h-[22px] rounded-full bg-white flex items-center justify-center">
+                    <DollarSign className="w-4 h-4 text-[#1CD8C9]" />
                   </div>
                 </div>
+
                 <span className="font-['Schibsted_Grotesk-Bold',Helvetica] font-bold text-base">
                   Solicitar meu orçamento
                 </span>
@@ -76,6 +79,7 @@ const HeroSection: React.FC = () => {
                 Seus dados estão protegidos pela <strong className="font-extrabold">Lei Geral de Proteção de Dados</strong>.
               </p>
             </div>
+
 
             <div className="flex gap-6 pt-4">
               <div className="text-center">
