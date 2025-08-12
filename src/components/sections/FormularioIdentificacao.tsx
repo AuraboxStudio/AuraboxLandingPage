@@ -1,9 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+
 interface Props {
   nomeInicial?: string;
   emailInicial?: string;
   onAbrirTermos?: () => void;
   onAbrirCookies?: () => void;
+  // Adicionar callback para salvar dados quando o formulário muda
+  onDadosAlterados?: (dados: any) => void;
+  // Receber dados já preenchidos
+  dadosIniciais?: any;
 }
 
 export default function FormularioIdentificacao({ 
@@ -11,6 +16,8 @@ export default function FormularioIdentificacao({
   emailInicial = "",
   onAbrirCookies,
   onAbrirTermos,
+  onDadosAlterados,
+  dadosIniciais,
  }: Props) {
 
   const [step, setStep] = useState(1);
@@ -27,6 +34,26 @@ export default function FormularioIdentificacao({
     mensagem: "",
     aceite: false,
   });
+
+  // Usar dados iniciais se fornecidos (preservar dados entre navegações)
+  useEffect(() => {
+    if (dadosIniciais) {
+      setFormData(dadosIniciais);
+    } else {
+      setFormData(prev => ({
+        ...prev,
+        nome: nomeInicial,
+        email: emailInicial,
+      }));
+    }
+  }, [nomeInicial, emailInicial, dadosIniciais]);
+
+  // Notificar o componente pai sempre que os dados mudarem
+  useEffect(() => {
+    if (onDadosAlterados) {
+      onDadosAlterados({ formData, step });
+    }
+  }, [formData, step, onDadosAlterados]);
 
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
@@ -48,7 +75,6 @@ export default function FormularioIdentificacao({
     if (step === 3) {
       if (!formData.areaAtuacao.trim()) newErrors.areaAtuacao = "Área obrigatória.";
       if (!formData.porteEmpresa.trim()) newErrors.porteEmpresa = "Porte obrigatório.";
-
       if (!formData.aceite) newErrors.aceite = "Você deve aceitar os termos.";
     }
     setErrors(newErrors);

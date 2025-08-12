@@ -1,16 +1,32 @@
 "use client";
 
 import React, { useState } from "react";
+import { ModalConteudoPadrao } from "./ModalConteudoPadrao";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { DollarSign, Mail, Shield, User } from "lucide-react";
-import { FormularioIdentificacao } from "./FormularioIdentificacao";
+import FormularioIdentificacao from "./FormularioIdentificacao";
 
 export default function CallToActionSection() {
   const [modalOpen, setModalOpen] = useState<null | "termosServicos" | "cookies" | "formulario">(null);
+  const [returnToForm, setReturnToForm] = useState(false);
   const [formDataParcial, setFormDataParcial] = useState({
     nome: "",
     email: "",
+  });
+  const [formStep, setFormStep] = useState(1);
+  const [formData, setFormData] = useState({
+    nome: "",
+    email: "",
+    telefone: "",
+    empresa: "",
+    estado: "",
+    cidade: "",
+    areaAtuacao: "",
+    porteEmpresa: "",
+    funcionarios: "",
+    mensagem: "",
+    aceite: false,
   });
 
   const modalContent = {
@@ -306,8 +322,6 @@ export default function CallToActionSection() {
 
         <p>Para mais informações, consulte:</p>
 
-        
-
       </div>
     ),
 
@@ -315,9 +329,25 @@ export default function CallToActionSection() {
       <FormularioIdentificacao
         nomeInicial={formDataParcial.nome}
         emailInicial={formDataParcial.email}
+        onAbrirTermos={() => {
+          setReturnToForm(true);
+          setModalOpen("termosServicos");
+        }}
+        onAbrirCookies={() => {
+          setReturnToForm(true);
+          setModalOpen("cookies");
+        }}
       />
     ),
+  };
 
+  const handleCloseModal = () => {
+    if (returnToForm && (modalOpen === "termosServicos" || modalOpen === "cookies")) {
+      setModalOpen("formulario");
+    } else {
+      setReturnToForm(false);
+      setModalOpen(null);
+    }
   };
 
   return (
@@ -413,7 +443,7 @@ export default function CallToActionSection() {
       {modalOpen && (
         <div
           className="fixed inset-0 bg-white/20 bg-opacity-30 backdrop-blur-sm flex items-center justify-center z-50"
-          onClick={() => setModalOpen(null)}
+          onClick={handleCloseModal}
         >
           <div
             className="bg-white rounded-lg max-w-[800px] w-full max-h-[80vh] overflow-hidden relative"
@@ -421,7 +451,7 @@ export default function CallToActionSection() {
           >
             <button
               className="absolute top-3 right-3 text-gray-600 hover:text-gray-900 font-bold text-2xl"
-              onClick={() => setModalOpen(null)}
+              onClick={handleCloseModal}
               aria-label="Fechar modal"
             >
               ×

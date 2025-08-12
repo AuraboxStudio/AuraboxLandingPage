@@ -1,32 +1,6 @@
 "use client";
-
 import React from "react";
 import { Button } from "../ui/button";
-
-const renderCookiesTable = (rows: string[][]) => (
-  <div className="overflow-hidden mt-4">
-    {/* Cabeçalho */}
-    <div className="bg-[#f78837] text-white font-bold text-sm flex items-center px-4 py-2 rounded-full">
-      <div className="flex-1">Cookie</div>
-      <div className="flex-1">Provedor</div>
-      <div className="flex-1">Finalidade</div>
-      <div className="w-[106px]">Duração</div>
-      <div className="w-[129px] text-center">Tipo</div>
-    </div>
-    {/* Linhas */}
-    <div className="mt-2 bg-white rounded-[40px] overflow-hidden divide-y divide-gray-200 border border-gray-200">
-      {rows.map((row, idx) => (
-        <div key={idx} className="flex items-start p-4">
-          <div className="flex-1">{row[0]}</div>
-          <div className="flex-1">{row[1]}</div>
-          <div className="flex-1">{row[2]}</div>
-          <div className="w-[106px]">{row[3]}</div>
-          <div className="w-[129px] text-center">{row[4]}</div>
-        </div>
-      ))}
-    </div>
-  </div>
-);
 
 export const ModalConteudoPadrao = {
   termosServicos: (onClose?: () => void) => (
@@ -39,14 +13,14 @@ export const ModalConteudoPadrao = {
         com nossos Termos e Condições. Estes Termos e Condições abrangem todos os aplicativos, serviços de internet ou extensões dos sites relacionados. Caso você não concorde ou não tenha ficado claro algum ponto, sugere-se que você{" "}
         <span className="font-bold uppercase">NÃO NAVEGUE MAIS NELE</span>{" "}
         até que tenha sanado todas as suas dúvidas. Você poderá ainda, a qualquer tempo, retornar ao site, clicar em{" "}
-        <span className="font-bold">“Termos de Uso”</span>{" "}
+        <span className="font-bold">"Termos de Uso"</span>{" "}
         e reler quantas vezes desejar.
       </p>
 
       <h4 className="text-base font-bold">Termos e Condições</h4>
 
       <p>
-        2. Os Termos e Condições da <span className="font-bold">Aurabox Studio</span> regem o uso deste site e todo o seu conteúdo (“Site”). Estes termos descrevem as regras e regulamentos que orientam o uso da Aurabox Studio localizado pelo link <span className="font-bold">auraboxstudio.com</span>. Todos os materiais/informações/documentos/serviços ou todas as outras entidades (coletivamente referidas como “conteúdo”) que aparecem no referido domínio serão administrados de acordo com estes Termos e Condições.
+        2. Os Termos e Condições da <span className="font-bold">Aurabox Studio</span> regem o uso deste site e todo o seu conteúdo ("Site"). Estes termos descrevem as regras e regulamentos que orientam o uso da Aurabox Studio localizado pelo link <span className="font-bold">auraboxstudio.com</span>. Todos os materiais/informações/documentos/serviços ou todas as outras entidades (coletivamente referidas como "conteúdo") que aparecem no referido domínio serão administrados de acordo com estes Termos e Condições.
       </p>
 
       <p>
@@ -100,7 +74,7 @@ export const ModalConteudoPadrao = {
 
       <h4 className="font-bold mt-6">Conteúdo do Usuário</h4>
       <p>
-        10. “Conteúdo do Usuário” refere-se a qualquer áudio, vídeo, texto, imagem ou outro material que você decida exibir neste site. Ao publicar esse conteúdo, você concede à Aurabox Studio uma licença não exclusiva, mundial, irrevogável, isenta de royalties e sublicenciável para usar, reproduzir, adaptar, publicar, traduzir e distribuir esse conteúdo em qualquer mídia. O conteúdo deve ser de sua autoria e não pode infringir os direitos de terceiros. A Aurabox Studio reserva-se o direito de monitorar e remover qualquer conteúdo considerado inadequado, ofensivo ou ilegal.
+        10. "Conteúdo do Usuário" refere-se a qualquer áudio, vídeo, texto, imagem ou outro material que você decida exibir neste site. Ao publicar esse conteúdo, você concede à Aurabox Studio uma licença não exclusiva, mundial, irrevogável, isenta de royalties e sublicenciável para usar, reproduzir, adaptar, publicar, traduzir e distribuir esse conteúdo em qualquer mídia. O conteúdo deve ser de sua autoria e não pode infringir os direitos de terceiros. A Aurabox Studio reserva-se o direito de monitorar e remover qualquer conteúdo considerado inadequado, ofensivo ou ilegal.
       </p>
 
       <h4 className="font-bold mt-6">Solicitação de Orçamento</h4>
@@ -187,119 +161,144 @@ export const ModalConteudoPadrao = {
       </p>
 
       <div className="flex justify-center mt-8">
-        <Button onClick={onClose}>Fechar</Button>
+        <Button
+          className="bg-[#f78837] hover:bg-[#f78837]/90 text-white rounded-full px-6 py-2"
+          onClick={onClose}
+        >
+          Fechar
+        </Button>
       </div>
     </div>
   ),
 
   cookies: (onClose?: () => void) => (
     <div className="text-[#002432] text-sm space-y-4 w-full max-w-none">
-      <h3 className="text-xl font-bold text-[#26c7b7]">
-        Política de Cookies – Aurabox Studio
-      </h3>
-      <p className="text-xs text-right italic text-gray-500">
-        Última atualização: 01/07/2023
-      </p>
+      <h3 className="text-xl font-bold text-[#26c7b7]">Política de Cookies – Aurabox Studio</h3>
+
+      <p className="text-xs text-right italic text-gray-500">Última atualização: 01/07/2023</p>
 
       <h4 className="font-bold">1. INTRODUÇÃO</h4>
-      <p>
-        Esta Política de Cookies explica como a Aurabox Studio utiliza cookies e
-        tecnologias similares para reconhecer o usuário quando visita seu site.
-        Esta política está em conformidade com a Lei nº 13.709/2018 (Lei Geral de
-        Proteção de Dados – LGPD) e demais normativos aplicáveis.
-      </p>
+
+      <p>Esta Política de Cookies explica como a Aurabox Studio utiliza cookies e tecnologias similares para reconhecer o usuário quando visita seu site. A presente política está em conformidade com a Lei nº 13.709/2018 (Lei Geral de Proteção de Dados – LGPD) e demais normativos aplicáveis.</p>
 
       <h4 className="font-bold">2. O QUE SÃO COOKIES?</h4>
-      <p>
-        Cookies são pequenos arquivos de texto armazenados no dispositivo do
-        usuário ao visitar um site, contendo pequenas quantidades de informações
-        que permitem identificar preferências, hábitos de navegação e outras
-        interações técnicas com a página acessada.
-      </p>
+
+      <p>Cookies são arquivos de texto armazenados no dispositivo do usuário ao visitar um site, contendo pequenas quantidades de informações que permitem identificar preferências, hábitos de navegação e outras interações técnicas com a página acessada.</p>
 
       <h4 className="font-bold">3. QUAIS COOKIES UTILIZAMOS?</h4>
-      <p>
-        Abaixo estão listados os cookies utilizados pela Aurabox Studio, divididos
-        por categorias conforme sua finalidade.
-      </p>
+
+      <p>Abaixo estão listados os cookies utilizados, divididos por categorias conforme sua finalidade.</p>
 
       <h5 className="font-bold mt-6">3.1. Cookies Essenciais</h5>
-      {renderCookiesTable([
-        ["cookie_consent", "Aurabox", "Armazena preferências de consentimento", "12 meses", "Essencial"],
-        ["_ga", "Google", "Mede interações no site", "2 anos", "Estatístico"],
-        ["_gid", "Google", "Distingue usuários únicos", "24 horas", "Estatístico"]
-      ])}
 
-      <h5 className="font-bold mt-6">3.2. Cookies de Autenticação</h5>
-      {renderCookiesTable([
-        ["oauth_token_*", "Google", "Login via conta Google (OAuth2.0)", "Sessão", "3ª parte"],
-        ["g_userinfo (var.)", "Google", "Armazena nome, email e foto", "Sessão", "3ª parte"]
-      ])}
+      <div className="rounded-[40px] overflow-hidden mt-4">
+        {/* Cabeçalho da Tabela */}
+        <div className="bg-[#f78837] rounded-t-[40px] flex items-center py-2 px-3">
+          {[
+            { name: "Cookie", className: "flex-1" },
+            { name: "Provedor", className: "flex-1" },
+            { name: "Finalidade", className: "flex-1" },
+            { name: "Duração", className: "w-[106px]" },
+            { name: "Tipo", className: "w-[129px] text-center" },
+          ].map((item, index) => (
+            <div
+              key={index}
+              className={`${item.className} flex items-center ${item.name === "Tipo" ? "justify-center" : ""}`}
+            >
+              <div className="font-['Schibsted_Grotesk-Bold'] text-white text-sm tracking-[0] leading-normal w-fit">
+                {item.name}
+              </div>
+            </div>
+          ))}
+        </div>
 
-      <h5 className="font-bold mt-6">3.3. Cookies de Desempenho e Estatísticas</h5>
-      {renderCookiesTable([
-        ["_ga", "Google Analytics 4", "Distinguir usuários únicos", "2 anos", "3ª parte"],
-        ["_ga_*", "Google Analytics 4", "Persistência de sessão", "1 ano", "3ª parte"]
-      ])}
+        {/* Linhas da Tabela */}
+        <div className="bg-white divide-y divide-gray-200 rounded-b-[40px] overflow-hidden text-base text-black">
+          <div className="flex items-start p-4">
+            <div className="flex-1">cookie_consent</div>
+            <div className="flex-1">Aurabox</div>
+            <div className="flex-1">Armazena preferências de consentimento</div>
+            <div className="w-[106px]">12 meses</div>
+            <div className="w-[129px] text-center">Essencial</div>
+          </div>
 
-      <h5 className="font-bold mt-6">3.4. Cookies Funcionais</h5>
-      {renderCookiesTable([
-        ["chat_widget", "Aurabox", "Exibir e manter histórico do chat de suporte", "Sessão", "Funcional"]
-      ])}
+          <div className="flex items-start p-4">
+            <div className="flex-1">_ga</div>
+            <div className="flex-1">Google</div>
+            <div className="flex-1">Mede interações no site</div>
+            <div className="w-[106px]">2 anos</div>
+            <div className="w-[129px] text-center">Estatístico</div>
+          </div>
 
-      <h5 className="font-bold mt-6">3.5. Cookies de Marketing/Publicidade</h5>
-      {renderCookiesTable([
-        ["fr", "Facebook", "Entrega de anúncios relevantes", "3 meses", "3ª parte"],
-        ["IDE", "Google Ads", "Entrega de anúncios personalizados", "1 ano", "3ª parte"]
-      ])}
+          <div className="flex items-start p-4">
+            <div className="flex-1">_gid</div>
+            <div className="flex-1">Google</div>
+            <div className="flex-1">Distingue usuários únicos</div>
+            <div className="w-[106px]">24 horas</div>
+            <div className="w-[129px] text-center">Estatístico</div>
+          </div>
+        </div>
+      </div>
 
-      <h4 className="font-bold mt-6">4. FORMULÁRIO DE CONTATO</h4>
-      <p>
-        O preenchimento do formulário de contato implica no fornecimento de dados
-        pessoais que serão utilizados para responder à solicitação.
-      </p>
+      <h5 className="font-bold">3.2.Cookies de Autenticação</h5>
 
-      <h4 className="font-bold">5. GERENCIAMENTO DE COOKIES</h4>
-      <p>
-        O usuário pode, a qualquer momento, alterar suas preferências de cookies
-        acessando as configurações do navegador ou as opções de gerenciamento
-        disponibilizadas no site.
-      </p>
+      {/* Tabela de Cookies */}
+      <div className="rounded-[40px] overflow-hidden mt-2">
+        <div className="flex items-start bg-[#f5f5f5] p-4 font-bold">
+          <div className="flex-1">Cookie</div>
+          <div className="flex-1">Provedor</div>
+          <div className="flex-1">Finalidade</div>
+          <div className="w-[106px]">Duração</div>
+          <div className="w-[129px] text-center">Tipo</div>
+        </div>
+        <div className="divide-y divide-gray-200 border border-t-0 rounded-b-[40px] overflow-hidden text-sm">
+          <div className="flex items-start p-4">
+            <div className="flex-1">oauth_token_*</div>
+            <div className="flex-1">Google</div>
+            <div className="flex-1">Login via conta Google (OAuth2.0)</div>
+            <div className="w-[106px]">Sessão</div>
+            <div className="w-[129px] text-center">3ª parte</div>
+          </div>
+          <div className="flex items-start p-4">
+            <div className="flex-1">g_userinfo (var.)</div>
+            <div className="flex-1">Google</div>
+            <div className="flex-1">Armazena nome, email e foto</div>
+            <div className="w-[106px]">Sessão</div>
+            <div className="w-[129px] text-center">3ª parte</div>
+          </div>
+        </div>
+      </div>
 
-      <h4 className="font-bold">6. TRANSFERÊNCIA INTERNACIONAL DE DADOS</h4>
-      <p>
-        Alguns cookies podem gerar transferência internacional de dados. Nesses
-        casos, a Aurabox Studio assegura que as transferências ocorrem com base em
-        mecanismos legais reconhecidos.
-      </p>
+      <h5 className="font-bold">3.3.Cookies de Desempenho e Estatísticas</h5>
 
-      <h4 className="font-bold">7. ATUALIZAÇÕES DESTA POLÍTICA</h4>
-      <p>
-        Esta Política poderá ser atualizada para refletir mudanças na utilização
-        de cookies ou em requisitos legais.
-      </p>
+      {/* Tabela de Cookies */}
+      <div className="rounded-[40px] overflow-hidden mt-2">
+        <div className="flex items-start bg-[#f5f5f5] p-4 font-bold">
+          <div className="flex-1">Cookie</div>
+          <div className="flex-1">Provedor</div>
+          <div className="flex-1">Finalidade</div>
+          <div className="w-[106px]">Duração</div>
+          <div className="w-[129px] text-center">Tipo</div>
+        </div>
+        <div className="divide-y divide-gray-200 border border-t-0 rounded-b-[40px] overflow-hidden text-sm">
+          <div className="flex items-start p-4">
+            <div className="flex-1">_ga</div>
+            <div className="flex-1">Google Analytics 4</div>
+            <div className="flex-1">Distinguir usuários únicos</div>
+            <div className="w-[106px]">2 anos</div>
+            <div className="w-[129px] text-center">3ª parte</div>
+          </div>
+          <div className="flex items-start p-4">
+            <div className="flex-1">_ga_*</div>
+            <div className="flex-1">Google Analytics 4</div>
+            <div className="flex-1">Persistência de sessão</div>
+            <div className="w-[106px]">1 ano</div>
+            <div className="w-[129px] text-center">3ª parte</div>
+          </div>
+        </div>
+      </div>
 
-      <h4 className="font-bold">8. INFORMAÇÕES ADICIONAIS</h4>
-      <p>
-        Para informações adicionais sobre como tratamos seus dados pessoais,
-        consulte nossa Política de Privacidade.
-      </p>
-
-      <h4 className="font-bold">9. DEFINIÇÕES</h4>
-      <p>
-        Para fins desta política: “Cookie” é um pequeno arquivo armazenado no
-        navegador; “Provedor” é a entidade responsável; “Finalidade” descreve o
-        objetivo; “Duração” é o tempo de retenção; e “Tipo” indica se é essencial,
-        funcional ou de terceiros.
-      </p>
-
-      <h4 className="font-bold">10. CONTATO</h4>
-      <p>
-        Em caso de dúvidas, envie um e-mail para:{" "}
-        <a href="mailto:comercial@auraboxstudio.com" className="underline text-[#1CD8C9]">
-          comercial@auraboxstudio.com
-        </a>
-      </p>
+      <p>Para mais informações, consulte:</p>
 
       <div className="flex justify-center mt-8">
         <Button
