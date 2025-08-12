@@ -1,61 +1,41 @@
-import React, { useState, useEffect } from "react";
+// src/components/FormularioIdentificacao.tsx
+import React from "react";
 
-interface Props {
-  nomeInicial?: string;
-  emailInicial?: string;
-  onAbrirTermos?: () => void;
-  onAbrirCookies?: () => void;
-  // Adicionar callback para salvar dados quando o formulário muda
-  onDadosAlterados?: (dados: any) => void;
-  // Receber dados já preenchidos
-  dadosIniciais?: any;
+interface FormData {
+  nome: string;
+  email: string;
+  telefone: string;
+  empresa: string;
+  estado: string;
+  cidade: string;
+  areaAtuacao: string;
+  porteEmpresa: string;
+  funcionarios: string;
+  mensagem: string;
+  aceite: boolean;
 }
 
-export default function FormularioIdentificacao({ 
-  nomeInicial = "",
-  emailInicial = "",
+interface FormState {
+  formData: FormData;
+  step: number;
+}
+
+interface Props {
+  formState: FormState;
+  onUpdate: (updates: Partial<FormState>) => void;
+  onAbrirTermos?: () => void;
+  onAbrirCookies?: () => void;
+}
+
+export default function FormularioIdentificacao({
+  formState,
+  onUpdate,
   onAbrirCookies,
   onAbrirTermos,
-  onDadosAlterados,
-  dadosIniciais,
- }: Props) {
+}: Props) {
+  const { formData, step } = formState;
 
-  const [step, setStep] = useState(1);
-  const [formData, setFormData] = useState({
-    nome: nomeInicial,
-    email: emailInicial,
-    telefone: "",
-    empresa: "",
-    estado: "",
-    cidade: "",
-    areaAtuacao: "",
-    porteEmpresa: "",
-    funcionarios: "",
-    mensagem: "",
-    aceite: false,
-  });
-
-  // Usar dados iniciais se fornecidos (preservar dados entre navegações)
-  useEffect(() => {
-    if (dadosIniciais) {
-      setFormData(dadosIniciais);
-    } else {
-      setFormData(prev => ({
-        ...prev,
-        nome: nomeInicial,
-        email: emailInicial,
-      }));
-    }
-  }, [nomeInicial, emailInicial, dadosIniciais]);
-
-  // Notificar o componente pai sempre que os dados mudarem
-  useEffect(() => {
-    if (onDadosAlterados) {
-      onDadosAlterados({ formData, step });
-    }
-  }, [formData, step, onDadosAlterados]);
-
-  const [errors, setErrors] = useState<{ [key: string]: string }>({});
+  const [errors, setErrors] = React.useState<{ [key: string]: string }>({});
 
   const validateStep = () => {
     const newErrors: { [key: string]: string } = {};
@@ -81,8 +61,7 @@ export default function FormularioIdentificacao({
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleChange = (field: string, value: string | boolean) => {
-    // Aplica máscara telefone
+  const handleChange = (field: keyof FormData, value: string | boolean) => {
     if (field === "telefone" && typeof value === "string") {
       let digits = value.replace(/\D/g, "");
       if (digits.length > 11) digits = digits.slice(0, 11);
@@ -96,15 +75,17 @@ export default function FormularioIdentificacao({
         value = `(${digits}`;
       }
     }
-    setFormData((prev) => ({ ...prev, [field]: value }));
+    onUpdate({ formData: { ...formData, [field]: value as any } });
     setErrors((prev) => ({ ...prev, [field]: "" }));
   };
 
   const handleNext = () => {
-    if (validateStep()) setStep((prev) => prev + 1);
+    if (validateStep()) {
+      onUpdate({ step: step + 1 });
+    }
   };
 
-  const handleBack = () => setStep((prev) => prev - 1);
+  const handleBack = () => onUpdate({ step: step - 1 });
 
   if (step === 4) {
     return (
@@ -145,7 +126,7 @@ export default function FormularioIdentificacao({
                 type="text"
                 name={field}
                 value={(formData as any)[field]}
-                onChange={(e) => handleChange(field, e.target.value)}
+                onChange={(e) => handleChange(field as keyof FormData, e.target.value)}
                 className={`w-full px-4 py-3 rounded-full border ${
                   errors[field] ? "border-red-500" : "border-gray-400"
                 } bg-[#E3EAEA] text-[#002432] text-sm`}
@@ -165,7 +146,7 @@ export default function FormularioIdentificacao({
                 type="text"
                 name={field}
                 value={(formData as any)[field]}
-                onChange={(e) => handleChange(field, e.target.value)}
+                onChange={(e) => handleChange(field as keyof FormData, e.target.value)}
                 className={`w-full px-4 py-3 rounded-full border ${
                   errors[field] ? "border-red-500" : "border-gray-400"
                 } bg-[#E3EAEA] text-[#002432] text-sm`}

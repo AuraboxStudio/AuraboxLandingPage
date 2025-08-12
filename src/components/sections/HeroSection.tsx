@@ -1,20 +1,43 @@
+// src/components/HeroSection.tsx
 "use client";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { DollarSign, Shield } from "lucide-react";
-import React, { useState } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import FormularioIdentificacao from "./FormularioIdentificacao";
 import { ModalConteudoPadrao } from "./ModalConteudoPadrao";
 
 export default function HeroSection() {
   const [modalOpen, setModalOpen] = useState<null | "termosServicos" | "cookies" | "formulario">(null);
   const [returnToForm, setReturnToForm] = useState(false);
-
-  // Estado parcial (mantém nome e email ao sair e voltar do form)
   const [formDataParcial, setFormDataParcial] = useState({
     nome: "",
     email: "",
   });
+
+  const [formStateCompleto, setFormStateCompleto] = useState({
+    formData: {
+      nome: "",
+      email: "",
+      telefone: "",
+      empresa: "",
+      estado: "",
+      cidade: "",
+      areaAtuacao: "",
+      porteEmpresa: "",
+      funcionarios: "",
+      mensagem: "",
+      aceite: false,
+    },
+    step: 1,
+  });
+
+  const handleFormUpdate = useCallback((updates: any) => {
+    setFormStateCompleto(prev => ({
+      ...prev,
+      ...updates
+    }));
+  }, []);
 
   const handleAbrirTermos = () => {
     setReturnToForm(true);
@@ -28,10 +51,38 @@ export default function HeroSection() {
 
   const handleAbrirFormulario = () => {
     setReturnToForm(false);
+    setFormStateCompleto(prev => ({
+      ...prev,
+      formData: {
+        ...prev.formData,
+        nome: formDataParcial.nome,
+        email: formDataParcial.email,
+      }
+    }));
     setModalOpen("formulario");
   };
 
   const handleCloseModal = () => {
+    if (formStateCompleto.step === 4) {
+      setFormStateCompleto({
+        formData: {
+          nome: "",
+          email: "",
+          telefone: "",
+          empresa: "",
+          estado: "",
+          cidade: "",
+          areaAtuacao: "",
+          porteEmpresa: "",
+          funcionarios: "",
+          mensagem: "",
+          aceite: false,
+        },
+        step: 1,
+      });
+      setFormDataParcial({ nome: "", email: "" });
+    }
+
     if (returnToForm && (modalOpen === "termosServicos" || modalOpen === "cookies")) {
       setModalOpen("formulario");
     } else {
@@ -45,30 +96,18 @@ export default function HeroSection() {
     cookies: ModalConteudoPadrao.cookies(handleCloseModal),
     formulario: (
       <FormularioIdentificacao
-        nomeInicial={formDataParcial.nome}
-        emailInicial={formDataParcial.email}
         onAbrirTermos={handleAbrirTermos}
         onAbrirCookies={handleAbrirCookies}
+        formState={formStateCompleto}
+        onUpdate={handleFormUpdate}
       />
     ),
   };
 
   return (
     <>
-      {/* Logo */}
-      <div className="absolute top-6 left-0 w-full z-50">
-        <div className="max-w-[1200px] mx-auto px-4">
-          <img
-            src="/logo_aurabox_padrao.png"
-            alt="Logo Aurabox"
-            className="w-[140px] h-auto"
-          />
-        </div>
-      </div>
-
       <section className="pt-28 pb-16 w-full relative">
         <div className="max-w-[1200px] mx-auto px-4 flex flex-col lg:flex-row items-center justify-between gap-6">
-          {/* Coluna esquerda */}
           <div className="flex-1 max-w-[520px] space-y-6">
             <h1 className="text-[32px] md:text-[40px] font-bebas-nue-pro font-bold leading-tight text-[#002432]">
               <span className="whitespace-nowrap block">SOLUÇÕES FORA DA CAIXA</span>
@@ -76,11 +115,9 @@ export default function HeroSection() {
                 PARA O <span className="text-[#f78837]">SEU NEGÓCIO</span>
               </span>
             </h1>
-
             <p className="text-lg font-sans font-bold text-[#002432]">
               Expanda sua marca com uma equipe dedicada a consolidar a presença da sua empresa.
             </p>
-
             <div className="space-y-4">
               <div className="flex flex-col lg:flex-row gap-4">
                 <Input
@@ -101,7 +138,6 @@ export default function HeroSection() {
                   }
                 />
               </div>
-
               <Button
                 className="relative w-full h-[50px] bg-[#1CD8C9] hover:bg-[#1CD8C9]/90 border-[3px] border-[#002432] rounded-full text-black shadow-[6px_6px_0px_#002432] hover:shadow-[10px_10px_0px_#002432] transition-all duration-300 hover:-translate-x-1 hover:-translate-y-1"
                 onClick={handleAbrirFormulario}
@@ -115,7 +151,6 @@ export default function HeroSection() {
                   Solicitar meu orçamento
                 </span>
               </Button>
-
               <div className="flex items-center gap-2 text-sm text-[#002432] opacity-80">
                 <Shield className="w-4 h-4 text-[#26c7b7]" />
                 <p>
@@ -125,8 +160,6 @@ export default function HeroSection() {
               </div>
             </div>
           </div>
-
-          {/* Coluna direita */}
           <div className="flex-1 relative flex justify-center">
             <img
               src="/imagem_aurabox_clientefeliz.png"
@@ -150,8 +183,6 @@ export default function HeroSection() {
             />
           </div>
         </div>
-
-        {/* Modal */}
         {modalOpen && (
           <div
             className="fixed inset-0 bg-white/20 bg-opacity-30 backdrop-blur-sm flex items-center justify-center z-50"
