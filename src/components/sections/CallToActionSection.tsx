@@ -1,7 +1,7 @@
 // src/components/CallToActionSection.tsx
 "use client";
 
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback } from "react";
 import { ModalConteudoPadrao } from "./ModalConteudoPadrao";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
@@ -11,10 +11,7 @@ import FormularioIdentificacao from "./FormularioIdentificacao";
 export default function CallToActionSection() {
   const [modalOpen, setModalOpen] = useState<null | "termosServicos" | "cookies" | "formulario">(null);
   const [returnToForm, setReturnToForm] = useState(false);
-  const [formDataParcial, setFormDataParcial] = useState({
-    nome: "",
-    email: "",
-  });
+  const [formDataParcial, setFormDataParcial] = useState({ nome: "", email: "" });
 
   const [formStateCompleto, setFormStateCompleto] = useState({
     formData: {
@@ -34,10 +31,7 @@ export default function CallToActionSection() {
   });
 
   const handleFormUpdate = useCallback((updates: any) => {
-    setFormStateCompleto(prev => ({
-      ...prev,
-      ...updates
-    }));
+    setFormStateCompleto(prev => ({ ...prev, ...updates }));
   }, []);
 
   const handleCloseModal = () => {
@@ -60,7 +54,6 @@ export default function CallToActionSection() {
       });
       setFormDataParcial({ nome: "", email: "" });
     }
-
     if (returnToForm && (modalOpen === "termosServicos" || modalOpen === "cookies")) {
       setModalOpen("formulario");
     } else {
@@ -70,20 +63,8 @@ export default function CallToActionSection() {
   };
 
   const modalContent = {
-    termosServicos: (
-      <div className="py-10">
-        <h2 className="text-[28px] font-bold mb-4">Termos de Serviço</h2>
-        <p>Aqui você pode adicionar o conteúdo dos seus termos de serviço.</p>
-        <button className="mt-6 px-4 py-2 bg-[#f78837] text-white rounded-full" onClick={handleCloseModal}>Fechar</button>
-      </div>
-    ),
-    cookies: (
-      <div className="py-10">
-        <h2 className="text-[28px] font-bold mb-4">Política de Cookies</h2>
-        <p>Aqui você pode adicionar o conteúdo da sua política de cookies.</p>
-        <button className="mt-6 px-4 py-2 bg-[#f78837] text-white rounded-full" onClick={handleCloseModal}>Fechar</button>
-      </div>
-    ),
+    termosServicos: ModalConteudoPadrao.termosServicos(handleCloseModal),
+    cookies: ModalConteudoPadrao.cookies(handleCloseModal),
     formulario: (
       <FormularioIdentificacao
         onAbrirTermos={() => {
@@ -101,12 +82,12 @@ export default function CallToActionSection() {
   };
 
   return (
-    <section className="py-24 w-full bg-[#DFE5E5] relative">
+    <section className="py-24 w-full bg-[#DFE5E5] relative font-sans">
       <div className="max-w-[800px] mx-auto px-4 text-center">
-        <h2 className="text-[40px] md:text-[48px] font-['Bebas_Neue_Pro-Bold'] text-[#002432] leading-tight mb-4">
+        <h2 className="text-[40px] md:text-[48px] font-bold text-[#002432] leading-tight mb-4">
           PRONTO PARA <br /> <span className="text-[#f78837]">TRANSFORMAR SEU NEGÓCIO?</span>
         </h2>
-        <p className="text-lg text-[#002432] opacity-80 font-['Schibsted_Grotesk-Medium'] max-w-[500px] mx-auto mb-10">
+        <p className="text-lg text-[#002432] opacity-80 font-medium max-w-[500px] mx-auto mb-10">
           Solicite seu orçamento personalizado e descubra como podemos impulsionar sua marca.
         </p>
         <div className="rounded-[30px] border-[3px] border-[#002432] shadow-[6px_6px_0px_#002432] bg-white p-8">
@@ -114,7 +95,7 @@ export default function CallToActionSection() {
             <div className="relative flex-1">
               <User className="absolute left-4 top-1/2 transform -translate-y-1/2 text-[#a7a7aa] w-5 h-5" />
               <Input
-                className="h-[50px] pl-12 rounded-full bg-[#f5f5f5] border border-[#e0e0e0] text-sm"
+                className="h-[50px] pl-12 rounded-full bg-[#f5f5f5] border border-[#e0e0e0] text-sm font-sans"
                 placeholder="Nome"
                 value={formDataParcial.nome}
                 onChange={(e) => setFormDataParcial({ ...formDataParcial, nome: e.target.value })}
@@ -123,7 +104,7 @@ export default function CallToActionSection() {
             <div className="relative flex-1">
               <Mail className="absolute left-4 top-1/2 transform -translate-y-1/2 text-[#a7a7aa] w-5 h-5" />
               <Input
-                className="h-[50px] pl-12 rounded-full bg-[#f5f5f5] border border-[#e0e0e0] text-sm"
+                className="h-[50px] pl-12 rounded-full bg-[#f5f5f5] border border-[#e0e0e0] text-sm font-sans"
                 placeholder="Email"
                 type="email"
                 value={formDataParcial.email}
@@ -132,7 +113,7 @@ export default function CallToActionSection() {
             </div>
           </div>
           <Button
-            className="relative w-[653px] h-[60px] bg-[#1CD8C9] hover:bg-[#1CD8C9]/90 border-[3px] border-[#002432] rounded-full text-black shadow-[6px_6px_0px_#002432] hover:shadow-[10px_10px_0px_#002432] transition-all duration-300 hover:-translate-x-1 hover:-translate-y-1 mx-auto"
+            className="relative w-[653px] h-[60px] bg-[#1CD8C9] hover:bg-[#1CD8C9]/90 border-[3px] border-[#002432] rounded-full text-black shadow-[6px_6px_0px_#002432] hover:shadow-[10px_10px_0px_#002432] transition-all duration-300 hover:-translate-x-1 hover:-translate-y-1 mx-auto font-sans"
             onClick={() => {
               setFormStateCompleto(prev => ({
                 ...prev,
@@ -150,18 +131,16 @@ export default function CallToActionSection() {
                 <DollarSign className="w-4 h-4 text-[#1CD8C9]" />
               </div>
             </div>
-            <span className="font-['Schibsted_Grotesk-Bold',Helvetica] font-bold text-xl">
-              Solicitar meu orçamento
-            </span>
+            <span className="font-bold text-xl">Solicitar meu orçamento</span>
           </Button>
-          <div className="flex items-center justify-center gap-2 pt-4 text-sm text-[#002432] opacity-80">
+          <div className="flex items-center justify-center gap-2 pt-4 text-sm text-[#002432] opacity-80 font-sans">
             <Shield className="w-4 h-4 text-[#26c7b7]" />
             <p>
               Seus dados estão protegidos pela <strong>Lei Geral de Proteção de Dados</strong>
             </p>
           </div>
         </div>
-        <div className="text-[#002432] opacity-70 cursor-pointer mt-6 flex justify-center items-center gap-4 text-sm">
+        <div className="text-[#002432] opacity-70 cursor-pointer mt-6 flex justify-center items-center gap-4 text-sm font-sans">
           <span
             onClick={() => setModalOpen("termosServicos")}
             className="underline hover:text-[#f78837]"
@@ -176,7 +155,7 @@ export default function CallToActionSection() {
             Políticas de Cookies
           </span>
         </div>
-        <div className="mt-10">
+        <div className="mt-10 font-sans">
           <img
             src="/logo_aurabox_marca.png"
             alt="Logo Aurabox"
@@ -194,7 +173,7 @@ export default function CallToActionSection() {
           onClick={handleCloseModal}
         >
           <div
-            className="bg-white rounded-lg max-w-[800px] w-full max-h-[80vh] overflow-hidden relative"
+            className="bg-white rounded-lg max-w-[800px] w-full max-h-[80vh] overflow-hidden relative font-sans"
             onClick={(e) => e.stopPropagation()}
           >
             <button

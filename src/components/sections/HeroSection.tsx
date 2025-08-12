@@ -109,12 +109,20 @@ export default function HeroSection() {
       <section className="pt-28 pb-16 w-full relative">
         <div className="max-w-[1200px] mx-auto px-4 flex flex-col lg:flex-row items-center justify-between gap-6">
           <div className="flex-1 max-w-[520px] space-y-6">
-            <h1 className="text-[32px] md:text-[40px] font-bebas-nue-pro font-bold leading-tight text-[#002432]">
-              <span className="whitespace-nowrap block">SOLUÇÕES FORA DA CAIXA</span>
-              <span className="whitespace-nowrap block">
-                PARA O <span className="text-[#f78837]">SEU NEGÓCIO</span>
-              </span>
-            </h1>
+            <div className="flex flex-col items-start gap-2">
+              <img
+                src="/logo_aurabox_padrao.png"
+                alt="Logo Aurabox"
+                className="w-[200px] h-auto -translate-y-30"
+              />
+              <h1 className="text-[32px] md:text-[40px] font-bebas-nue-pro font-bold leading-tight text-[#002432]">
+                <span className="block">SOLUÇÕES FORA DA CAIXA</span>
+                <span className="block">
+                  PARA O <span className="text-[#f78837]">SEU NEGÓCIO</span>
+                </span>
+              </h1>
+            </div>
+
             <p className="text-lg font-sans font-bold text-[#002432]">
               Expanda sua marca com uma equipe dedicada a consolidar a presença da sua empresa.
             </p>
@@ -151,12 +159,27 @@ export default function HeroSection() {
                   Solicitar meu orçamento
                 </span>
               </Button>
-              <div className="flex items-center gap-2 text-sm text-[#002432] opacity-80">
+              <div className="flex items-center gap-2 text-sm text-[#002432] opacity-80 ml-8">
                 <Shield className="w-4 h-4 text-[#26c7b7]" />
                 <p>
                   Seus dados estão protegidos pela{" "}
                   <strong>Lei Geral de Proteção de Dados</strong>
                 </p>
+              </div>
+
+              <div className="grid grid-cols-3 gap-6 text-center mt-6">
+                <div>
+                  <p className="text-[20px] font-bold text-[#002432]">78%</p>
+                  <p className="text-sm text-[#002432]">das decisões começam online</p>
+                </div>
+                <div>
+                  <p className="text-[20px] font-bold text-[#002432]">2.8X</p>
+                  <p className="text-sm text-[#002432]">mais crescimento com agências</p>
+                </div>
+                <div>
+                  <p className="text-[20px] font-bold text-[#002432]">45%</p>
+                  <p className="text-sm text-[#002432]">redução em CAC</p>
+                </div>
               </div>
             </div>
           </div>

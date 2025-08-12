@@ -28,6 +28,12 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
+        {/* Código de monitoramento do RD Station */}
+        <script
+          type="text/javascript"
+          async
+          src="https://d335luupugsy2.cloudfront.net/js/loader-scripts/94de3c6c-63d3-4f16-905f-ddb3535b43a0-loader.js"
+        ></script>
       </body>
     </html>
   );

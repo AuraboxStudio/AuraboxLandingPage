@@ -178,19 +178,15 @@ export const ModalConteudoPadrao = {
       <p className="text-xs text-right italic text-gray-500">Última atualização: 01/07/2023</p>
 
       <h4 className="font-bold">1. INTRODUÇÃO</h4>
-
       <p>Esta Política de Cookies explica como a Aurabox Studio utiliza cookies e tecnologias similares para reconhecer o usuário quando visita seu site. A presente política está em conformidade com a Lei nº 13.709/2018 (Lei Geral de Proteção de Dados – LGPD) e demais normativos aplicáveis.</p>
 
-      <h4 className="font-bold">2. O QUE SÃO COOKIES?</h4>
-
+      <h4 className="font-bold mt-6">2. O QUE SÃO COOKIES?</h4>
       <p>Cookies são arquivos de texto armazenados no dispositivo do usuário ao visitar um site, contendo pequenas quantidades de informações que permitem identificar preferências, hábitos de navegação e outras interações técnicas com a página acessada.</p>
 
-      <h4 className="font-bold">3. QUAIS COOKIES UTILIZAMOS?</h4>
-
+      <h4 className="font-bold mt-6">3. QUAIS COOKIES UTILIZAMOS?</h4>
       <p>Abaixo estão listados os cookies utilizados, divididos por categorias conforme sua finalidade.</p>
 
       <h5 className="font-bold mt-6">3.1. Cookies Essenciais</h5>
-
       <div className="rounded-[40px] overflow-hidden mt-4">
         {/* Cabeçalho da Tabela */}
         <div className="bg-[#f78837] rounded-t-[40px] flex items-center py-2 px-3">
@@ -221,37 +217,30 @@ export const ModalConteudoPadrao = {
             <div className="w-[106px]">12 meses</div>
             <div className="w-[129px] text-center">Essencial</div>
           </div>
-
-          <div className="flex items-start p-4">
-            <div className="flex-1">_ga</div>
-            <div className="flex-1">Google</div>
-            <div className="flex-1">Mede interações no site</div>
-            <div className="w-[106px]">2 anos</div>
-            <div className="w-[129px] text-center">Estatístico</div>
-          </div>
-
-          <div className="flex items-start p-4">
-            <div className="flex-1">_gid</div>
-            <div className="flex-1">Google</div>
-            <div className="flex-1">Distingue usuários únicos</div>
-            <div className="w-[106px]">24 horas</div>
-            <div className="w-[129px] text-center">Estatístico</div>
-          </div>
         </div>
       </div>
 
-      <h5 className="font-bold">3.2.Cookies de Autenticação</h5>
-
-      {/* Tabela de Cookies */}
+      <h5 className="font-bold mt-6">3.2. Cookies de Autenticação</h5>
       <div className="rounded-[40px] overflow-hidden mt-2">
-        <div className="flex items-start bg-[#f5f5f5] p-4 font-bold">
-          <div className="flex-1">Cookie</div>
-          <div className="flex-1">Provedor</div>
-          <div className="flex-1">Finalidade</div>
-          <div className="w-[106px]">Duração</div>
-          <div className="w-[129px] text-center">Tipo</div>
+        <div className="bg-[#f78837] rounded-t-[40px] flex items-center py-2 px-3">
+          {[
+            { name: "Cookie", className: "flex-1" },
+            { name: "Provedor", className: "flex-1" },
+            { name: "Finalidade", className: "flex-1" },
+            { name: "Duração", className: "w-[106px]" },
+            { name: "Tipo", className: "w-[129px] text-center" },
+          ].map((item, index) => (
+            <div
+              key={index}
+              className={`${item.className} flex items-center ${item.name === "Tipo" ? "justify-center" : ""}`}
+            >
+              <div className="font-['Schibsted_Grotesk-Bold'] text-white text-sm tracking-[0] leading-normal w-fit">
+                {item.name}
+              </div>
+            </div>
+          ))}
         </div>
-        <div className="divide-y divide-gray-200 border border-t-0 rounded-b-[40px] overflow-hidden text-sm">
+        <div className="bg-white divide-y divide-gray-200 border border-t-0 rounded-b-[40px] overflow-hidden text-sm">
           <div className="flex items-start p-4">
             <div className="flex-1">oauth_token_*</div>
             <div className="flex-1">Google</div>
@@ -269,18 +258,27 @@ export const ModalConteudoPadrao = {
         </div>
       </div>
 
-      <h5 className="font-bold">3.3.Cookies de Desempenho e Estatísticas</h5>
-
-      {/* Tabela de Cookies */}
+      <h5 className="font-bold mt-6">3.3. Cookies de Desempenho e Estatísticas</h5>
       <div className="rounded-[40px] overflow-hidden mt-2">
-        <div className="flex items-start bg-[#f5f5f5] p-4 font-bold">
-          <div className="flex-1">Cookie</div>
-          <div className="flex-1">Provedor</div>
-          <div className="flex-1">Finalidade</div>
-          <div className="w-[106px]">Duração</div>
-          <div className="w-[129px] text-center">Tipo</div>
+        <div className="bg-[#f78837] rounded-t-[40px] flex items-center py-2 px-3">
+          {[
+            { name: "Cookie", className: "flex-1" },
+            { name: "Provedor", className: "flex-1" },
+            { name: "Finalidade", className: "flex-1" },
+            { name: "Duração", className: "w-[106px]" },
+            { name: "Tipo", className: "w-[129px] text-center" },
+          ].map((item, index) => (
+            <div
+              key={index}
+              className={`${item.className} flex items-center ${item.name === "Tipo" ? "justify-center" : ""}`}
+            >
+              <div className="font-['Schibsted_Grotesk-Bold'] text-white text-sm tracking-[0] leading-normal w-fit">
+                {item.name}
+              </div>
+            </div>
+          ))}
         </div>
-        <div className="divide-y divide-gray-200 border border-t-0 rounded-b-[40px] overflow-hidden text-sm">
+        <div className="bg-white divide-y divide-gray-200 border border-t-0 rounded-b-[40px] overflow-hidden text-sm">
           <div className="flex items-start p-4">
             <div className="flex-1">_ga</div>
             <div className="flex-1">Google Analytics 4</div>
@@ -298,7 +296,69 @@ export const ModalConteudoPadrao = {
         </div>
       </div>
 
-      <p>Para mais informações, consulte:</p>
+      <p className="mt-6">Para mais informações, consulte a <span className="font-bold">Política de Privacidade</span>, em especial o item <span className="font-bold">3.4. Cookies de Terceiros e Publicidade</span>.</p>
+
+      <h4 className="font-bold mt-6">4. FORMULÁRIO DE CONTATO</h4>
+      <p>O preenchimento do formulário de contato implica no fornecimento de dados pessoais pelo usuário, que autoriza a sua coleta, armazenamento, tratamento e uso comercial.</p>
+      <p>Dados coletados:</p>
+      <ul className="list-disc list-inside space-y-1 ml-4">
+        <li>Nome*</li>
+        <li>Nome da empresa*</li>
+        <li>Estado*</li>
+        <li>Cidade*</li>
+        <li>E-mail*</li>
+        <li>Telefone*</li>
+        <li>Assunto de situação*</li>
+        <li>Descrição da situação*</li>
+        <li>Anexo de documentação*</li>
+        <li>Número de funcionários*</li>
+        <li>Orçamento*</li>
+      </ul>
+      <p>Os itens marcados com asterisco (*) são de preenchimento obrigatório. Os dados poderão ser integrados e utilizados, para fins estatísticos e de relacionamento, com bancos de dados e CRMs.</p>
+
+      <h4 className="font-bold mt-6">5. GERENCIAMENTO DE COOKIES</h4>
+      <p>O usuário poderá, a qualquer tempo, alterar suas preferências de consentimento por meio das configurações do navegador. As instruções podem ser encontradas no menu de ajuda do navegador ou em nosso próprio painel de controle de cookies.</p>
+
+      <h4 className="font-bold mt-6">6. TRANSFERÊNCIA INTERNACIONAL DE DADOS</h4>
+      <p>Determinados cookies são gerenciados por empresas sediadas fora do território nacional. Ao consentir com o uso desses cookies, o usuário autoriza a transferência internacional de seus dados para fins de análise de desempenho do site e publicidade, conforme estipulado nesta política.</p>
+
+      <h4 className="font-bold mt-6">7. ATUALIZAÇÕES DESTA POLÍTICA</h4>
+      <p>Esta Política de Cookies poderá ser atualizada a qualquer tempo. A Aurabox Studio notificará seus usuários, caso sejam realizadas alterações substanciais, solicitando novo consentimento, quando necessário. A última atualização estará disponível no topo desta página.</p>
+
+      <h4 className="font-bold mt-6">8. INFORMAÇÕES ADICIONAIS SOBRE O TRATAMENTO DE DADOS PESSOAIS</h4>
+      <h5 className="font-bold mt-2">8.1. Ação Jurídica</h5>
+      <p>Os dados pessoais dos usuários poderão ser utilizados pela Aurabox Studio para fins judiciais, administrativos ou legais, inclusive em processos judiciais ou ações preliminares decorrentes do uso inadequado do site ou de atos ilícitos praticados em nosso nome.</p>
+      
+      <h5 className="font-bold mt-4">8.2. Informações complementares</h5>
+      <p>O titular dos dados tem o direito a qualquer momento de solicitar a exclusão, correção e atualização dos seus dados, bem como solicitar informações sobre o tratamento, por meio dos canais oficiais de contato.</p>
+
+      <h5 className="font-bold mt-4">8.3. Uso de dados e segurança</h5>
+      <p>Arquivos de log do site (logs) e dados como IP, navegador e sistema operacional poderão ser utilizados para fins de manutenção, segurança e auditoria.</p>
+
+      <h4 className="font-bold mt-6">9. DEFINIÇÕES</h4>
+      <p>
+        <span className="font-bold">Dados Pessoais:</span> Informação relacionada a pessoa natural identificada ou identificável.
+      </p>
+      <p>
+        <span className="font-bold">Cookies de Terceiros:</span> Cookies que são definidos por provedores de serviços externos, como Google Analytics, para fins estatísticos ou de publicidade.
+      </p>
+      <p>
+        <span className="font-bold">Usuário:</span> Pessoa que acessa o site.
+      </p>
+      <p>
+        <span className="font-bold">Controlador:</span> A Aurabox Studio é a entidade legal (pessoa jurídica de direito privado) responsável pelas decisões referentes ao tratamento de dados, como coleta, armazenamento, uso e exclusão, de acordo com a LGPD.
+      </p>
+      <p>
+        <span className="font-bold">Serviços:</span> Funcionalidades e recursos disponibilizados pelo site da Aurabox Studio.
+      </p>
+
+      <h4 className="font-bold mt-6">10. CONTATO</h4>
+      <p>
+        Dúvidas ou solicitações relacionadas a esta política podem ser encaminhadas para:{" "}
+        <a href="mailto:comercial@auraboxstudio.com" className="underline text-[#1CD8C9] hover:text-[#0daaa0]">
+          comercial@auraboxstudio.com
+        </a>
+      </p>
 
       <div className="flex justify-center mt-8">
         <Button
