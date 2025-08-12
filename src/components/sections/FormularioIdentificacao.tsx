@@ -2,24 +2,32 @@ import React, { useState } from "react";
 interface Props {
   nomeInicial?: string;
   emailInicial?: string;
+  onAbrirTermos?: () => void;
+  onAbrirCookies?: () => void;
 }
 
+export default function FormularioIdentificacao({ 
+  nomeInicial = "",
+  emailInicial = "",
+  onAbrirCookies,
+  onAbrirTermos,
+ }: Props) {
 
-export function FormularioIdentificacao({ nomeInicial = "", emailInicial = "" }: Props) {
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     nome: nomeInicial,
     email: emailInicial,
     telefone: "",
     empresa: "",
-    cidade: "",
     estado: "",
+    cidade: "",
     areaAtuacao: "",
     porteEmpresa: "",
     funcionarios: "",
     mensagem: "",
     aceite: false,
   });
+
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
   const validateStep = () => {
@@ -34,13 +42,13 @@ export function FormularioIdentificacao({ nomeInicial = "", emailInicial = "" }:
       if (!formData.empresa.trim()) newErrors.empresa = "Empresa obrigatória.";
     }
     if (step === 2) {
-      if (!formData.cidade.trim()) newErrors.cidade = "Cidade obrigatória.";
       if (!formData.estado.trim()) newErrors.estado = "Estado obrigatório.";
+      if (!formData.cidade.trim()) newErrors.cidade = "Cidade obrigatória.";
     }
     if (step === 3) {
       if (!formData.areaAtuacao.trim()) newErrors.areaAtuacao = "Área obrigatória.";
       if (!formData.porteEmpresa.trim()) newErrors.porteEmpresa = "Porte obrigatório.";
-      if (!formData.funcionarios.trim()) newErrors.funcionarios = "Informe o nº de funcionários.";
+
       if (!formData.aceite) newErrors.aceite = "Você deve aceitar os termos.";
     }
     setErrors(newErrors);
@@ -124,7 +132,7 @@ export function FormularioIdentificacao({ nomeInicial = "", emailInicial = "" }:
 
       {step === 2 && (
         <div className="space-y-4">
-          {["cidade", "estado"].map((field) => (
+          {["estado", "cidade"].map((field) => (
             <div key={field}>
               <label className="text-[#002432] block mb-1 capitalize">{field}*</label>
               <input
@@ -177,7 +185,7 @@ export function FormularioIdentificacao({ nomeInicial = "", emailInicial = "" }:
           </div>
 
           <div>
-            <label className="text-[#002432] block mb-1">Número de funcionários*</label>
+            <label className="text-[#002432] block mb-1">Número de funcionários</label>
             <input
               type="number"
               value={formData.funcionarios}
@@ -207,7 +215,16 @@ export function FormularioIdentificacao({ nomeInicial = "", emailInicial = "" }:
             />
             <p className="text-sm text-[#002432]">
               Declaro que li e concordo com os{" "}
-              <a href="#" className="underline text-[#f78837]">Termos de Uso e Privacidade</a> deste site.
+              <a
+                href="#"
+                className="underline text-[#f78837]"
+                onClick={(e) => {
+                  e.preventDefault();
+                  if (onAbrirTermos) onAbrirTermos();
+                }}
+              >
+                Termos de Uso e Privacidade.*
+              </a>
             </p>
           </div>
           {errors.aceite && <p className="text-red-500 text-xs mt-1">{errors.aceite}</p>}
