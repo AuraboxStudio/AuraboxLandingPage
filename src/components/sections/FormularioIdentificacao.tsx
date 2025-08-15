@@ -21,7 +21,7 @@ interface FormState {
 }
 
 interface Props {
-  formState: FormState;
+  formState?: FormState;
   onUpdate: (updates: Partial<FormState>) => void;
   onAbrirTermos?: () => void;
   onAbrirCookies?: () => void;
@@ -31,13 +31,31 @@ type RDStationType = {
   sendEvent: (eventName: string, data: FormData) => void;
 };
 
+const defaultFormData: FormData = {
+  nome: "",
+  email: "",
+  telefone: "",
+  empresa: "",
+  estado: "",
+  cidade: "",
+  areaAtuacao: "",
+  porteEmpresa: "",
+  funcionarios: "",
+  mensagem: "",
+  aceite: false,
+};
+
 export default function FormularioIdentificacao({
   formState,
   onUpdate,
   onAbrirCookies,
   onAbrirTermos,
 }: Props) {
-  const { formData, step } = formState;
+  // Garante que sempre tenha valores
+  const { formData, step } = formState || {
+    formData: defaultFormData,
+    step: 1,
+  };
 
   const [errors, setErrors] = React.useState<{ [key: string]: string }>({});
 
@@ -90,17 +108,7 @@ export default function FormularioIdentificacao({
     // 1. Envio pelo script (client-side)
     if (typeof window !== "undefined" && (window as Window & { RDStation?: RDStationType }).RDStation) {
       ((window as unknown) as Window & { RDStation: RDStationType }).RDStation.sendEvent("form_submitted", {
-        nome: formData.nome,
-        email: formData.email,
-        telefone: formData.telefone,
-        empresa: formData.empresa,
-        estado: formData.estado,
-        cidade: formData.cidade,
-        areaAtuacao: formData.areaAtuacao,
-        porteEmpresa: formData.porteEmpresa,
-        funcionarios: formData.funcionarios,
-        mensagem: formData.mensagem,
-        aceite: formData.aceite,
+        ...formData,
       });
     }
 
@@ -125,6 +133,25 @@ export default function FormularioIdentificacao({
     }
   };
 
-  // ... resto do JSX original (sem alterações visuais)
-  // 🔹 Mantenha seu código original de renderização abaixo
+  if (step === 4) {
+    return (
+      <div className="text-center py-10">
+        <div className="flex justify-center mb-4">
+          <div className="w-16 h-16 bg-[#26C7B7] rounded-full flex items-center justify-center">
+            <span className="text-white text-3xl font-bold">✓</span>
+          </div>
+        </div>
+        <h2 className="text-xl font-bold text-[#002432] mb-2">Tudo certo!</h2>
+        <p className="text-[#002432]">Enviamos um e-mail confirmando sua solicitação.</p>
+        <p className="text-[#002432]">Cheque sua caixa de entrada para mais informações.</p>
+      </div>
+    );
+  }
+
+  // ⬇ Aqui mantém o JSX original das etapas do seu formulário
+  return (
+    <div className="bg-white w-full rounded-[40px] p-10">
+      {/* ... seu conteúdo original das etapas */}
+    </div>
+  );
 }
