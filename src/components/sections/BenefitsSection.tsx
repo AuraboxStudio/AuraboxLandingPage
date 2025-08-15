@@ -1,6 +1,7 @@
 // components/sections/BenefitsSection.tsx
 import { Card, CardContent } from "@/components/ui/card";
 import React from "react";
+import Image from "next/image";
 
 export default function BenefitsSection(): React.JSX.Element {
   const benefitCards = [
@@ -74,15 +75,20 @@ export default function BenefitsSection(): React.JSX.Element {
     <section className="py-24 w-full bg-[#DFE5E5]">
       <div className="max-w-[1341px] mx-auto px-4 flex flex-col lg:flex-row items-center gap-16">
         {/* Imagem */}
-        <div className="w-full lg:w-1/2 relative">
-          <img
+        <div className="relative w-full lg:w-1/2 flex justify-center items-center">
+          <Image
             src="/imagem_aurabox_pensando.png"
             alt="Pessoa pensando"
+            width={500}
+            height={500}
             className="w-full max-w-[500px] h-auto mx-auto"
+            priority
           />
-          <img
+          <Image
             src="/logo_aurabox_marca.png"
             alt="Logo sobre imagem"
+            width={80}
+            height={80}
             className="w-[80px] absolute bottom-4 left-4 drop-shadow-xl"
           />
         </div>
@@ -106,10 +112,6 @@ export default function BenefitsSection(): React.JSX.Element {
               </Card>
             ))}
           </div>
-
-          <p className="mt-8 text-sm text-[#002432] opacity-70 font-['Schibsted_Grotesk-Medium']">
-            Identifica-se com algum desses cenários?
-          </p>
         </div>
       </div>
     </section>
