@@ -1,6 +1,13 @@
 "use client";
 
 import React from "react";
+import { createClient } from '@supabase/supabase-js'
+
+// Configuração do Supabase diretamente no componente
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+)
 
 interface FormData {
   nome: string;
@@ -22,7 +29,6 @@ interface FormState {
 }
 
 interface Props {
-  // deixa opcional pra nunca quebrar caso o pai ainda não tenha inicializado
   formState?: FormState;
   onUpdate: (updates: Partial<FormState>) => void;
   onAbrirTermos?: () => void;
@@ -53,11 +59,9 @@ export default function FormularioIdentificacao({
   onAbrirCookies,
   onAbrirTermos,
 }: Props) {
-  // garante valores iniciais para não abrir vazio
-  const { formData, step } =
-    formState ?? { formData: defaultFormData, step: 1 };
-
+  const { formData, step } = formState ?? { formData: defaultFormData, step: 1 };
   const [errors, setErrors] = React.useState<{ [key: string]: string }>({});
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
 
   const validateStep = () => {
     const newErrors: { [key: string]: string } = {};
@@ -110,8 +114,43 @@ export default function FormularioIdentificacao({
     [formData, onUpdate]
   );
 
+  // VERSÃO CLIENT-SIDE para Netlify
+  const enviarParaSupabase = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('formulario_identificacao')
+        .insert([
+          {
+            nome: formData.nome,
+            email: formData.email,
+            telefone: formData.telefone,
+            empresa: formData.empresa,
+            estado: formData.estado,
+            cidade: formData.cidade,
+            area_atuacao: formData.areaAtuacao,
+            porte_empresa: formData.porteEmpresa,
+            funcionarios: formData.funcionarios ? parseInt(formData.funcionarios) : null,
+            mensagem: formData.mensagem,
+            aceite: formData.aceite,
+          }
+        ])
+        .select();
+
+      if (error) {
+        console.error('Erro ao enviar para Supabase:', error);
+        throw new Error(`Erro do Supabase: ${error.message}`);
+      }
+
+      console.log('Dados enviados com sucesso para Supabase:', data);
+      return data;
+    } catch (error) {
+      console.error('Erro ao salvar no Supabase:', error);
+      throw error;
+    }
+  };
+
   const enviarParaRDStation = async () => {
-    // 1) Script do RD (client-side)
+    // Script do RD (client-side)
     if (
       typeof window !== "undefined" &&
       (window as Window & { RDStation?: RDStationType }).RDStation
@@ -134,7 +173,7 @@ export default function FormularioIdentificacao({
       );
     }
 
-    // 2) API de Conversões (server-side) — à prova de adblock
+    // API de Conversões do RD Station (se existir)
     try {
       await fetch("/api/rd-conversion", {
         method: "POST",
@@ -143,15 +182,36 @@ export default function FormularioIdentificacao({
       });
     } catch (err) {
       console.error("Erro ao enviar para RD Station API:", err);
+      // Não quebra o fluxo se o RD falhar
     }
   };
 
-  const handleNext = () => {
+  const handleNext = async () => {
     if (validateStep()) {
       if (step === 3) {
-        enviarParaRDStation();
+        setIsSubmitting(true);
+        try {
+          // Tenta enviar para Supabase primeiro
+          await enviarParaSupabase();
+          
+          // Depois tenta RD Station (não quebra se falhar)
+          try {
+            await enviarParaRDStation();
+          } catch (rdError) {
+            console.warn('RD Station falhou, mas Supabase foi salvo:', rdError);
+          }
+          
+          // Avança para success
+          onUpdate({ step: step + 1 });
+        } catch (error) {
+          console.error('Erro ao enviar formulário:', error);
+          alert('Erro ao enviar formulário. Tente novamente.');
+        } finally {
+          setIsSubmitting(false);
+        }
+      } else {
+        onUpdate({ step: step + 1 });
       }
-      onUpdate({ step: step + 1 });
     }
   };
 
@@ -350,7 +410,8 @@ export default function FormularioIdentificacao({
         {step > 1 && (
           <button
             onClick={handleBack}
-            className="bg-[#f78837] text-white text-lg px-8 py-2 rounded-full hover:bg-[#f78837]/90"
+            disabled={isSubmitting}
+            className="bg-[#f78837] text-white text-lg px-8 py-2 rounded-full hover:bg-[#f78837]/90 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             voltar
           </button>
@@ -358,9 +419,13 @@ export default function FormularioIdentificacao({
         <div className="flex-1" />
         <button
           onClick={handleNext}
-          className="bg-[#f78837] text-white text-lg px-8 py-2 rounded-full hover:bg-[#f78837]/90"
+          disabled={isSubmitting}
+          className="bg-[#f78837] text-white text-lg px-8 py-2 rounded-full hover:bg-[#f78837]/90 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
         >
-          {step === 3 ? "Enviar" : "Próximo"}
+          {isSubmitting && (
+            <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+          )}
+          {step === 3 ? (isSubmitting ? "Enviando..." : "Enviar") : "Próximo"}
         </button>
       </div>
     </div>
