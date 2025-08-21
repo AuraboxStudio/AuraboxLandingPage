@@ -218,9 +218,8 @@ export default function FormularioIdentificacao({
 
   const handleBack = () => onUpdate({ step: step - 1 });
 
-  // Resto do componente permanece igual...
-  // [resto do código do formulário]
-  
+  const handleBack = () => onUpdate({ step: step - 1 });
+
   if (step === 4) {
     return (
       <div className="text-center py-10">
@@ -242,8 +241,196 @@ export default function FormularioIdentificacao({
 
   return (
     <div className="bg-white w-full rounded-[40px] p-10">
-      {/* Resto do JSX do formulário permanece igual... */}
-      {/* [incluir todo o JSX existente] */}
+      {/* Etapas */}
+      <div className="flex justify-between mb-8">
+        {["Identificação", "Localização", "Informações"].map((label, i) => (
+          <div
+            key={i}
+            className={`flex items-center gap-2 ${
+              step === i + 1 ? "text-[#26C7B7]" : "opacity-30"
+            }`}
+          >
+            <div
+              className={`w-8 h-8 rounded-full flex items-center justify-center font-bold ${
+                step === i + 1 ? "bg-[#26C7B7] text-white" : "bg-[#dfe5e5] text-white"
+              }`}
+            >
+              {i + 1}
+            </div>
+            <span className="text-xl font-bold">{label}</span>
+          </div>
+        ))}
+      </div>
+
+      {/* STEP 1 */}
+      {step === 1 && (
+        <div className="space-y-4">
+          {["nome", "email", "telefone", "empresa"].map((field) => (
+            <div key={field}>
+              <label className="text-[#002432] block mb-1 capitalize">
+                {field.replace(/([A-Z])/g, " $1")}*
+              </label>
+              <input
+                type="text"
+                name={field}
+                value={(formData as any)[field]}
+                onChange={(e) =>
+                  handleChange(field as keyof FormData, e.target.value)
+                }
+                className={`w-full px-4 py-3 rounded-full border ${
+                  errors[field] ? "border-red-500" : "border-gray-400"
+                } bg-[#E3EAEA] text-[#002432] text-sm`}
+              />
+              {errors[field] && (
+                <p className="text-red-500 text-xs mt-1">{errors[field]}</p>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* STEP 2 */}
+      {step === 2 && (
+        <div className="space-y-4">
+          {["estado", "cidade"].map((field) => (
+            <div key={field}>
+              <label className="text-[#002432] block mb-1 capitalize">
+                {field}*
+              </label>
+              <input
+                type="text"
+                name={field}
+                value={(formData as any)[field]}
+                onChange={(e) =>
+                  handleChange(field as keyof FormData, e.target.value)
+                }
+                className={`w-full px-4 py-3 rounded-full border ${
+                  errors[field] ? "border-red-500" : "border-gray-400"
+                } bg-[#E3EAEA] text-[#002432] text-sm`}
+              />
+              {errors[field] && (
+                <p className="text-red-500 text-xs mt-1">{errors[field]}</p>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* STEP 3 */}
+      {step === 3 && (
+        <div className="space-y-4">
+          <div>
+            <label className="text-[#002432] block mb-1">Área de atuação*</label>
+            <input
+              type="text"
+              value={formData.areaAtuacao}
+              onChange={(e) => handleChange("areaAtuacao", e.target.value)}
+              className={`w-full px-4 py-3 rounded-full border ${
+                errors.areaAtuacao ? "border-red-500" : "border-gray-400"
+              } bg-[#E3EAEA] text-[#002432] text-sm`}
+            />
+            {errors.areaAtuacao && (
+              <p className="text-red-500 text-xs mt-1">{errors.areaAtuacao}</p>
+            )}
+          </div>
+
+          <div>
+            <label className="text-[#002432] block mb-1">Porte da empresa*</label>
+            <select
+              value={formData.porteEmpresa}
+              onChange={(e) => handleChange("porteEmpresa", e.target.value)}
+              className={`w-full px-4 py-3 rounded-full border ${
+                errors.porteEmpresa ? "border-red-500" : "border-gray-400"
+              } bg-[#E3EAEA] text-[#002432] text-sm`}
+            >
+              <option value="">Selecione</option>
+              <option value="MEI">MEI</option>
+              <option value="Micro">Micro</option>
+              <option value="Pequena">Pequena</option>
+              <option value="Média">Média</option>
+              <option value="Grande">Grande</option>
+            </select>
+            {errors.porteEmpresa && (
+              <p className="text-red-500 text-xs mt-1">{errors.porteEmpresa}</p>
+            )}
+          </div>
+
+          <div>
+            <label className="text-[#002432] block mb-1">
+              Número de funcionários
+            </label>
+            <input
+              type="number"
+              value={formData.funcionarios}
+              onChange={(e) => handleChange("funcionarios", e.target.value)}
+              className={`w-full px-4 py-3 rounded-full border ${
+                errors.funcionarios ? "border-red-500" : "border-gray-400"
+              } bg-[#E3EAEA] text-[#002432] text-sm`}
+            />
+            {errors.funcionarios && (
+              <p className="text-red-500 text-xs mt-1">{errors.funcionarios}</p>
+            )}
+          </div>
+
+          <div>
+            <label className="text-[#002432] block mb-1">Mensagem</label>
+            <textarea
+              value={formData.mensagem}
+              onChange={(e) => handleChange("mensagem", e.target.value)}
+              className="w-full px-4 py-3 rounded-2xl border border-gray-400 bg-[#E3EAEA] text-[#002432] text-sm min-h-[100px] resize-none"
+            />
+          </div>
+
+          <div className="flex items-start gap-2">
+            <input
+              type="checkbox"
+              checked={formData.aceite}
+              onChange={(e) => handleChange("aceite", e.target.checked)}
+              className="mt-1"
+            />
+            <p className="text-sm text-[#002432]">
+              Declaro que li e concordo com os{" "}
+              <a
+                href="#"
+                className="underline text-[#f78837]"
+                onClick={(e) => {
+                  e.preventDefault();
+                  if (onAbrirTermos) onAbrirTermos();
+                }}
+              >
+                Termos de Uso e Privacidade.*
+              </a>
+            </p>
+          </div>
+          {errors.aceite && (
+            <p className="text-red-500 text-xs mt-1">{errors.aceite}</p>
+          )}
+        </div>
+      )}
+
+      {/* Navegação */}
+      <div className="flex justify-between pt-6">
+        {step > 1 && (
+          <button
+            onClick={handleBack}
+            disabled={isSubmitting}
+            className="bg-[#f78837] text-white text-lg px-8 py-2 rounded-full hover:bg-[#f78837]/90 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            voltar
+          </button>
+        )}
+        <div className="flex-1" />
+        <button
+          onClick={handleNext}
+          disabled={isSubmitting}
+          className="bg-[#f78837] text-white text-lg px-8 py-2 rounded-full hover:bg-[#f78837]/90 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+        >
+          {isSubmitting && (
+            <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+          )}
+          {step === 3 ? (isSubmitting ? "Enviando..." : "Enviar") : "Próximo"}
+        </button>
+      </div>
     </div>
   );
 }
