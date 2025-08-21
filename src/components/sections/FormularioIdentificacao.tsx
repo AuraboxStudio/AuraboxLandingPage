@@ -218,8 +218,6 @@ export default function FormularioIdentificacao({
 
   const handleBack = () => onUpdate({ step: step - 1 });
 
-  const handleBack = () => onUpdate({ step: step - 1 });
-
   if (step === 4) {
     return (
       <div className="text-center py-10">
