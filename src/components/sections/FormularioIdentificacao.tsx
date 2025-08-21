@@ -116,6 +116,7 @@ export default function FormularioIdentificacao({
 
   // VERSÃO CLIENT-SIDE para Netlify
   const enviarParaSupabase = async () => {
+    console.log(">>> tentando enviar para supabase", formData); // 👈 debug
     try {
       const { data, error } = await supabase
         .from('formulario_identificacao')
