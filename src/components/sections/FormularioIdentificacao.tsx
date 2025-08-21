@@ -149,42 +149,42 @@ export default function FormularioIdentificacao({
     }
   };
 
-  const enviarParaRDStation = async () => {
-    // Script do RD (client-side)
-    if (
-      typeof window !== "undefined" &&
-      (window as Window & { RDStation?: RDStationType }).RDStation
-    ) {
-      (window as Window & { RDStation: RDStationType }).RDStation.sendEvent(
-        "form_submitted",
-        {
-          nome: formData.nome,
-          email: formData.email,
-          telefone: formData.telefone,
-          empresa: formData.empresa,
-          estado: formData.estado,
-          cidade: formData.cidade,
-          areaAtuacao: formData.areaAtuacao,
-          porteEmpresa: formData.porteEmpresa,
-          funcionarios: formData.funcionarios,
-          mensagem: formData.mensagem,
-          aceite: formData.aceite ? "Sim" : "Não",
-        }
-      );
-    }
+  // const enviarParaRDStation = async () => {
+  //   // Script do RD (client-side)
+  //   if (
+  //     typeof window !== "undefined" &&
+  //     (window as Window & { RDStation?: RDStationType }).RDStation
+  //   ) {
+  //     (window as Window & { RDStation: RDStationType }).RDStation.sendEvent(
+  //       "form_submitted",
+  //       {
+  //         nome: formData.nome,
+  //         email: formData.email,
+  //         telefone: formData.telefone,
+  //         empresa: formData.empresa,
+  //         estado: formData.estado,
+  //         cidade: formData.cidade,
+  //         areaAtuacao: formData.areaAtuacao,
+  //         porteEmpresa: formData.porteEmpresa,
+  //         funcionarios: formData.funcionarios,
+  //         mensagem: formData.mensagem,
+  //         aceite: formData.aceite ? "Sim" : "Não",
+  //       }
+  //     );
+  //   }
 
-    // API de Conversões do RD Station (se existir)
-    try {
-      await fetch("/api/rd-conversion", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
-    } catch (err) {
-      console.error("Erro ao enviar para RD Station API:", err);
-      // Não quebra o fluxo se o RD falhar
-    }
-  };
+  //   // API de Conversões do RD Station (se existir)
+  //   try {
+  //     await fetch("/api/rd-conversion", {
+  //       method: "POST",
+  //       headers: { "Content-Type": "application/json" },
+  //       body: JSON.stringify(formData),
+  //     });
+  //   } catch (err) {
+  //     console.error("Erro ao enviar para RD Station API:", err);
+  //     // Não quebra o fluxo se o RD falhar
+  //   }
+  // };
 
   const handleNext = async () => {
     if (validateStep()) {
