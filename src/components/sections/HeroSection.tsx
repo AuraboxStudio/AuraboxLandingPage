@@ -108,10 +108,10 @@ export default function HeroSection() {
     <>
       <section className="pt-16 sm:pt-20 lg:pt-28 pb-8 sm:pb-12 lg:pb-16 w-full relative overflow-hidden">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12">
+          <div className="flex flex-col items-center justify-between gap-6 sm:gap-8 lg:flex-row lg:gap-12">
             
             {/* Conteúdo Principal */}
-            <div className="w-full lg:flex-1 lg:max-w-[520px] space-y-4 sm:space-y-6 text-center lg:text-left">
+            <div className="w-full lg:flex-1 lg:max-w-[520px] space-y-4 sm:space-y-6 text-center lg:text-left order-1 lg:order-1">
               
               {/* Logo e Título */}
               <div className="flex flex-col items-center lg:items-start gap-3 sm:gap-4">
@@ -126,6 +126,31 @@ export default function HeroSection() {
                     PARA O <span className="text-[#f78837]">SEU NEGÓCIO</span>
                   </span>
                 </h1>
+              </div>
+
+              {/* Imagem - Mobile/Tablet (após o título) */}
+              <div className="w-full relative flex justify-center lg:hidden">
+                <img
+                  src="/imagem_aurabox_clientefeliz.png"
+                  alt="Cliente feliz"
+                  className="w-full max-w-[280px] sm:max-w-[320px] h-auto relative z-10"
+                />
+                {/* Ícones mobile - mais próximos como no desktop */}
+                <img
+                  src="/icone_aurabox_alvo3D.png"
+                  alt="Ícone alvo"
+                  className="absolute top-[5%] right-[20%] w-[50px] sm:w-[60px] z-0"
+                />
+                <img
+                  src="/icone_aurabox_like.png"
+                  alt="Ícone curtida"
+                  className="absolute top-[35%] left-[8%] w-[45px] sm:w-[50px] z-10"
+                />
+                <img
+                  src="/icone_aurabox_shopcart.png"
+                  alt="Ícone carrinho"
+                  className="absolute bottom-[15%] right-[5%] w-[55px] sm:w-[65px] z-10"
+                />
               </div>
 
               {/* Descrição */}
@@ -202,12 +227,13 @@ export default function HeroSection() {
             </div>
             
             {/* Imagem - Desktop apenas */}
-            <div className="hidden lg:flex flex-1 relative justify-center">
+            <div className="hidden lg:flex w-full lg:flex-1 relative justify-center order-2 lg:order-2">
               <img
                 src="/imagem_aurabox_clientefeliz.png"
                 alt="Cliente feliz"
                 className="w-full max-w-[400px] h-auto relative z-10 translate-x-[100px]"
               />
+              {/* Ícones decorativos - desktop */}
               <img
                 src="/icone_aurabox_alvo3D.png"
                 alt="Ícone alvo"
