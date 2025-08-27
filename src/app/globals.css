@@ -118,5 +118,99 @@
   }
   body {
     @apply bg-background text-foreground;
+    /* Melhor experiência de scroll em mobile */
+    -webkit-overflow-scrolling: touch;
+    /* Evita zoom automático em inputs no iOS */
+    -webkit-text-size-adjust: 100%;
+  }
+  
+  /* Melhoria para touch */
+  button, [role="button"] {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Inputs mais amigáveis ao mobile */
+  input, textarea, select {
+    /* Evita zoom automático no iOS quando font-size < 16px */
+    font-size: max(16px, 1rem);
+  }
+  
+  /* Melhor experiência em telas pequenas */
+  @media (max-width: 640px) {
+    input, textarea, select {
+      font-size: 16px;
+    }
+  }
+  
+  /* Scrollbar personalizada para webkit (desktop) */
+  @media (min-width: 1024px) {
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background: #c1c1c1;
+      border-radius: 4px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+      background: #a8a8a8;
+    }
+  }
+  
+  /* Melhores animações em dispositivos que suportam */
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+  
+  /* Remove outline padrão mas mantém acessibilidade */
+  *:focus {
+    outline: none;
+  }
+  
+  *:focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+  
+  /* Melhor contraste para textos pequenos em mobile */
+  @media (max-width: 768px) {
+    .text-xs {
+      color: rgb(from var(--foreground) r g b / 0.9);
+    }
+  }
+  
+  /* Utilitários para mobile */
+  .touch-pan-y {
+    touch-action: pan-y;
+  }
+  
+  .touch-pan-x {
+    touch-action: pan-x;
+  }
+  
+  .touch-none {
+    touch-action: none;
+  }
+  
+  /* Evita seleção de texto em elementos interativos */
+  .no-select {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  
+  /* Melhor renderização de texto */
+  .text-rendering-optimized {
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 }

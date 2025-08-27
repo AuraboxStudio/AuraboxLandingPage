@@ -220,17 +220,17 @@ export default function FormularioIdentificacao({
 
   if (step === 4) {
     return (
-      <div className="text-center py-10">
+      <div className="text-center py-8 sm:py-10">
         <div className="flex justify-center mb-4">
-          <div className="w-16 h-16 bg-[#26C7B7] rounded-full flex items-center justify-center">
-            <span className="text-white text-3xl font-bold">✓</span>
+          <div className="w-12 h-12 sm:w-16 sm:h-16 bg-[#26C7B7] rounded-full flex items-center justify-center">
+            <span className="text-white text-2xl sm:text-3xl font-bold">✓</span>
           </div>
         </div>
-        <h2 className="text-xl font-bold text-[#002432] mb-2">Tudo certo!</h2>
-        <p className="text-[#002432]">
+        <h2 className="text-lg sm:text-xl font-bold text-[#002432] mb-2">Tudo certo!</h2>
+        <p className="text-[#002432] text-sm sm:text-base mb-1">
           Enviamos um e-mail confirmando sua solicitação.
         </p>
-        <p className="text-[#002432]">
+        <p className="text-[#002432] text-sm sm:text-base">
           Cheque sua caixa de entrada para mais informações.
         </p>
       </div>
@@ -238,9 +238,9 @@ export default function FormularioIdentificacao({
   }
 
   return (
-    <div className="bg-white w-full rounded-[40px] p-10">
+    <div className="bg-white w-full rounded-[20px] sm:rounded-[30px] lg:rounded-[40px] p-6 sm:p-8 lg:p-10">
       {/* Etapas */}
-      <div className="flex justify-between mb-8">
+      <div className="flex justify-between mb-6 sm:mb-8">
         {["Identificação", "Localização", "Informações"].map((label, i) => (
           <div
             key={i}
@@ -249,13 +249,13 @@ export default function FormularioIdentificacao({
             }`}
           >
             <div
-              className={`w-8 h-8 rounded-full flex items-center justify-center font-bold ${
+              className={`w-6 h-6 sm:w-8 sm:h-8 rounded-full flex items-center justify-center font-bold text-sm sm:text-base ${
                 step === i + 1 ? "bg-[#26C7B7] text-white" : "bg-[#dfe5e5] text-white"
               }`}
             >
               {i + 1}
             </div>
-            <span className="text-xl font-bold">{label}</span>
+            <span className="text-sm sm:text-lg lg:text-xl font-bold">{label}</span>
           </div>
         ))}
       </div>
@@ -265,7 +265,7 @@ export default function FormularioIdentificacao({
         <div className="space-y-4">
           {["nome", "email", "telefone", "empresa"].map((field) => (
             <div key={field}>
-              <label className="text-[#002432] block mb-1 capitalize">
+              <label className="text-[#002432] block mb-1 capitalize text-sm sm:text-base">
                 {field.replace(/([A-Z])/g, " $1")}*
               </label>
               <input
@@ -275,9 +275,9 @@ export default function FormularioIdentificacao({
                 onChange={(e) =>
                   handleChange(field as keyof FormData, e.target.value)
                 }
-                className={`w-full px-4 py-3 rounded-full border ${
+                className={`w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-full border ${
                   errors[field] ? "border-red-500" : "border-gray-400"
-                } bg-[#E3EAEA] text-[#002432] text-sm`}
+                } bg-[#E3EAEA] text-[#002432] text-sm sm:text-base`}
               />
               {errors[field] && (
                 <p className="text-red-500 text-xs mt-1">{errors[field]}</p>
@@ -292,7 +292,7 @@ export default function FormularioIdentificacao({
         <div className="space-y-4">
           {["estado", "cidade"].map((field) => (
             <div key={field}>
-              <label className="text-[#002432] block mb-1 capitalize">
+              <label className="text-[#002432] block mb-1 capitalize text-sm sm:text-base">
                 {field}*
               </label>
               <input
@@ -302,9 +302,9 @@ export default function FormularioIdentificacao({
                 onChange={(e) =>
                   handleChange(field as keyof FormData, e.target.value)
                 }
-                className={`w-full px-4 py-3 rounded-full border ${
+                className={`w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-full border ${
                   errors[field] ? "border-red-500" : "border-gray-400"
-                } bg-[#E3EAEA] text-[#002432] text-sm`}
+                } bg-[#E3EAEA] text-[#002432] text-sm sm:text-base`}
               />
               {errors[field] && (
                 <p className="text-red-500 text-xs mt-1">{errors[field]}</p>
@@ -318,14 +318,14 @@ export default function FormularioIdentificacao({
       {step === 3 && (
         <div className="space-y-4">
           <div>
-            <label className="text-[#002432] block mb-1">Área de atuação*</label>
+            <label className="text-[#002432] block mb-1 text-sm sm:text-base">Área de atuação*</label>
             <input
               type="text"
               value={formData.areaAtuacao}
               onChange={(e) => handleChange("areaAtuacao", e.target.value)}
-              className={`w-full px-4 py-3 rounded-full border ${
+              className={`w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-full border ${
                 errors.areaAtuacao ? "border-red-500" : "border-gray-400"
-              } bg-[#E3EAEA] text-[#002432] text-sm`}
+              } bg-[#E3EAEA] text-[#002432] text-sm sm:text-base`}
             />
             {errors.areaAtuacao && (
               <p className="text-red-500 text-xs mt-1">{errors.areaAtuacao}</p>
@@ -333,13 +333,13 @@ export default function FormularioIdentificacao({
           </div>
 
           <div>
-            <label className="text-[#002432] block mb-1">Porte da empresa*</label>
+            <label className="text-[#002432] block mb-1 text-sm sm:text-base">Porte da empresa*</label>
             <select
               value={formData.porteEmpresa}
               onChange={(e) => handleChange("porteEmpresa", e.target.value)}
-              className={`w-full px-4 py-3 rounded-full border ${
+              className={`w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-full border ${
                 errors.porteEmpresa ? "border-red-500" : "border-gray-400"
-              } bg-[#E3EAEA] text-[#002432] text-sm`}
+              } bg-[#E3EAEA] text-[#002432] text-sm sm:text-base`}
             >
               <option value="">Selecione</option>
               <option value="MEI">MEI</option>
@@ -354,16 +354,16 @@ export default function FormularioIdentificacao({
           </div>
 
           <div>
-            <label className="text-[#002432] block mb-1">
+            <label className="text-[#002432] block mb-1 text-sm sm:text-base">
               Número de funcionários
             </label>
             <input
               type="number"
               value={formData.funcionarios}
               onChange={(e) => handleChange("funcionarios", e.target.value)}
-              className={`w-full px-4 py-3 rounded-full border ${
+              className={`w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-full border ${
                 errors.funcionarios ? "border-red-500" : "border-gray-400"
-              } bg-[#E3EAEA] text-[#002432] text-sm`}
+              } bg-[#E3EAEA] text-[#002432] text-sm sm:text-base`}
             />
             {errors.funcionarios && (
               <p className="text-red-500 text-xs mt-1">{errors.funcionarios}</p>
@@ -371,22 +371,22 @@ export default function FormularioIdentificacao({
           </div>
 
           <div>
-            <label className="text-[#002432] block mb-1">Mensagem</label>
+            <label className="text-[#002432] block mb-1 text-sm sm:text-base">Mensagem</label>
             <textarea
               value={formData.mensagem}
               onChange={(e) => handleChange("mensagem", e.target.value)}
-              className="w-full px-4 py-3 rounded-2xl border border-gray-400 bg-[#E3EAEA] text-[#002432] text-sm min-h-[100px] resize-none"
+              className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-2xl border border-gray-400 bg-[#E3EAEA] text-[#002432] text-sm sm:text-base min-h-[80px] sm:min-h-[100px] resize-none"
             />
           </div>
 
-          <div className="flex items-start gap-2">
+          <div className="flex items-start gap-2 sm:gap-3">
             <input
               type="checkbox"
               checked={formData.aceite}
               onChange={(e) => handleChange("aceite", e.target.checked)}
-              className="mt-1"
+              className="mt-1 w-4 h-4"
             />
-            <p className="text-sm text-[#002432]">
+            <p className="text-xs sm:text-sm text-[#002432]">
               Declaro que li e concordo com os{" "}
               <a
                 href="#"
@@ -412,7 +412,7 @@ export default function FormularioIdentificacao({
           <button
             onClick={handleBack}
             disabled={isSubmitting}
-            className="bg-[#f78837] text-white text-lg px-8 py-2 rounded-full hover:bg-[#f78837]/90 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="bg-[#f78837] text-white text-base sm:text-lg px-6 sm:px-8 py-2 rounded-full hover:bg-[#f78837]/90 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             voltar
           </button>
@@ -421,7 +421,7 @@ export default function FormularioIdentificacao({
         <button
           onClick={handleNext}
           disabled={isSubmitting}
-          className="bg-[#f78837] text-white text-lg px-8 py-2 rounded-full hover:bg-[#f78837]/90 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+          className="bg-[#f78837] text-white text-base sm:text-lg px-6 sm:px-8 py-2 rounded-full hover:bg-[#f78837]/90 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
         >
           {isSubmitting && (
             <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
