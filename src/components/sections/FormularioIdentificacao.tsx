@@ -183,6 +183,16 @@ export default function FormularioIdentificacao({
           
           // Enviar para Supabase
           await enviarParaSupabase();
+
+          // Enviar para Brevo também
+          await fetch("/api/addToBrevo", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              email: formData.email,
+              nome: formData.nome,
+            }),
+          });
           
           console.log("✅ Formulário enviado com sucesso!");
           
