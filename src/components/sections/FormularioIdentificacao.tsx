@@ -166,11 +166,43 @@ export default function FormularioIdentificacao({
         throw new Error(`Erro do Supabase: ${error.message}`);
       }
 
-      console.log('✅ Dados enviados com sucesso:', data);
+      console.log('✅ Dados enviados para Supabase com sucesso:', data);
       return data;
     } catch (error) {
-      console.error('❌ Erro geral:', error);
+      console.error('❌ Erro geral no Supabase:', error);
       throw error;
+    }
+  };
+
+  // Função para enviar para Brevo
+  const enviarParaBrevo = async () => {
+    console.log("📤 Iniciando envio para Brevo...");
+    
+    try {
+      const response = await fetch("/api/addToBrevo", {
+        method: "POST",
+        headers: { 
+          "Content-Type": "application/json" 
+        },
+        body: JSON.stringify({
+          email: formData.email,
+          nome: formData.nome,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || `Erro HTTP: ${response.status}`);
+      }
+
+      console.log("✅ Dados enviados para Brevo com sucesso:", data);
+      return data;
+    } catch (error: any) {
+      console.error('❌ Erro ao enviar para Brevo:', error);
+      // Não vamos falhar o envio por causa do Brevo
+      // Apenas logamos o erro
+      return { success: false, error: error.message };
     }
   };
 
@@ -181,19 +213,17 @@ export default function FormularioIdentificacao({
         try {
           console.log("🚀 Iniciando processo de envio...");
           
-          // Enviar para Supabase
+          // 1. Enviar para Supabase (obrigatório)
           await enviarParaSupabase();
-
-          // Enviar para Brevo também
-          await fetch("/api/addToBrevo", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              email: formData.email,
-              nome: formData.nome,
-            }),
-          });
           
+          // 2. Enviar para Brevo (opcional - não deve falhar o processo)
+          const brevoResult = await enviarParaBrevo();
+          if (brevoResult.success) {
+            console.log("✅ Brevo: Contato adicionado com sucesso");
+          } else {
+            console.warn("⚠️ Brevo: Falha no envio, mas continuando...", brevoResult.error);
+          }
+
           console.log("✅ Formulário enviado com sucesso!");
           
           // Avançar para tela de sucesso
@@ -201,7 +231,6 @@ export default function FormularioIdentificacao({
         } catch (error) {
           console.error('❌ Erro ao enviar formulário:', error);
           
-          // Mostrar erro mais específico para o usuário
           let mensagemErro = 'Erro ao enviar formulário. ';
           
           if (error instanceof Error) {
@@ -276,10 +305,13 @@ export default function FormularioIdentificacao({
           {["nome", "email", "telefone", "empresa"].map((field) => (
             <div key={field}>
               <label className="text-[#002432] block mb-1 capitalize text-sm sm:text-base">
-                {field.replace(/([A-Z])/g, " $1")}*
+                {field === "nome" ? "Nome" : 
+                 field === "email" ? "E-mail" : 
+                 field === "telefone" ? "Telefone" : 
+                 "Empresa"}*
               </label>
               <input
-                type="text"
+                type={field === "email" ? "email" : "text"}
                 name={field}
                 value={(formData as any)[field]}
                 onChange={(e) =>
@@ -288,6 +320,12 @@ export default function FormularioIdentificacao({
                 className={`w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-full border ${
                   errors[field] ? "border-red-500" : "border-gray-400"
                 } bg-[#E3EAEA] text-[#002432] text-sm sm:text-base`}
+                placeholder={
+                  field === "nome" ? "Seu nome completo" :
+                  field === "email" ? "seu@email.com" :
+                  field === "telefone" ? "(11) 99999-9999" :
+                  "Nome da sua empresa"
+                }
               />
               {errors[field] && (
                 <p className="text-red-500 text-xs mt-1">{errors[field]}</p>
@@ -303,7 +341,7 @@ export default function FormularioIdentificacao({
           {["estado", "cidade"].map((field) => (
             <div key={field}>
               <label className="text-[#002432] block mb-1 capitalize text-sm sm:text-base">
-                {field}*
+                {field === "estado" ? "Estado" : "Cidade"}*
               </label>
               <input
                 type="text"
@@ -315,6 +353,9 @@ export default function FormularioIdentificacao({
                 className={`w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-full border ${
                   errors[field] ? "border-red-500" : "border-gray-400"
                 } bg-[#E3EAEA] text-[#002432] text-sm sm:text-base`}
+                placeholder={
+                  field === "estado" ? "Ex: São Paulo" : "Ex: São Paulo"
+                }
               />
               {errors[field] && (
                 <p className="text-red-500 text-xs mt-1">{errors[field]}</p>
@@ -336,6 +377,7 @@ export default function FormularioIdentificacao({
               className={`w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-full border ${
                 errors.areaAtuacao ? "border-red-500" : "border-gray-400"
               } bg-[#E3EAEA] text-[#002432] text-sm sm:text-base`}
+              placeholder="Ex: E-commerce, Consultoria, Saúde..."
             />
             {errors.areaAtuacao && (
               <p className="text-red-500 text-xs mt-1">{errors.areaAtuacao}</p>
@@ -351,12 +393,12 @@ export default function FormularioIdentificacao({
                 errors.porteEmpresa ? "border-red-500" : "border-gray-400"
               } bg-[#E3EAEA] text-[#002432] text-sm sm:text-base`}
             >
-              <option value="">Selecione</option>
-              <option value="MEI">MEI</option>
-              <option value="Micro">Micro</option>
-              <option value="Pequena">Pequena</option>
-              <option value="Média">Média</option>
-              <option value="Grande">Grande</option>
+              <option value="">Selecione o porte</option>
+              <option value="MEI">MEI (Microempreendedor Individual)</option>
+              <option value="Micro">Micro Empresa</option>
+              <option value="Pequena">Pequena Empresa</option>
+              <option value="Média">Média Empresa</option>
+              <option value="Grande">Grande Empresa</option>
             </select>
             {errors.porteEmpresa && (
               <p className="text-red-500 text-xs mt-1">{errors.porteEmpresa}</p>
@@ -365,7 +407,7 @@ export default function FormularioIdentificacao({
 
           <div>
             <label className="text-[#002432] block mb-1 text-sm sm:text-base">
-              Número de funcionários
+              Número de funcionários (opcional)
             </label>
             <input
               type="number"
@@ -374,6 +416,8 @@ export default function FormularioIdentificacao({
               className={`w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-full border ${
                 errors.funcionarios ? "border-red-500" : "border-gray-400"
               } bg-[#E3EAEA] text-[#002432] text-sm sm:text-base`}
+              placeholder="Ex: 5"
+              min="0"
             />
             {errors.funcionarios && (
               <p className="text-red-500 text-xs mt-1">{errors.funcionarios}</p>
@@ -381,11 +425,12 @@ export default function FormularioIdentificacao({
           </div>
 
           <div>
-            <label className="text-[#002432] block mb-1 text-sm sm:text-base">Mensagem</label>
+            <label className="text-[#002432] block mb-1 text-sm sm:text-base">Mensagem (opcional)</label>
             <textarea
               value={formData.mensagem}
               onChange={(e) => handleChange("mensagem", e.target.value)}
               className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-2xl border border-gray-400 bg-[#E3EAEA] text-[#002432] text-sm sm:text-base min-h-[80px] sm:min-h-[100px] resize-none"
+              placeholder="Conte-nos mais sobre seu projeto ou necessidades..."
             />
           </div>
 
@@ -394,20 +439,32 @@ export default function FormularioIdentificacao({
               type="checkbox"
               checked={formData.aceite}
               onChange={(e) => handleChange("aceite", e.target.checked)}
-              className="mt-1 w-4 h-4"
+              className="mt-1 w-4 h-4 accent-[#26C7B7]"
             />
             <p className="text-xs sm:text-sm text-[#002432]">
               Declaro que li e concordo com os{" "}
               <a
                 href="#"
-                className="underline text-[#f78837]"
+                className="underline text-[#f78837] hover:text-[#f78837]/80"
                 onClick={(e) => {
                   e.preventDefault();
                   if (onAbrirTermos) onAbrirTermos();
                 }}
               >
-                Termos de Uso e Privacidade.*
+                Termos de Uso e Privacidade
+              </a>{" "}
+              e{" "}
+              <a
+                href="#"
+                className="underline text-[#f78837] hover:text-[#f78837]/80"
+                onClick={(e) => {
+                  e.preventDefault();
+                  if (onAbrirCookies) onAbrirCookies();
+                }}
+              >
+                Política de Cookies
               </a>
+              .*
             </p>
           </div>
           {errors.aceite && (
@@ -422,16 +479,16 @@ export default function FormularioIdentificacao({
           <button
             onClick={handleBack}
             disabled={isSubmitting}
-            className="bg-[#f78837] text-white text-base sm:text-lg px-6 sm:px-8 py-2 rounded-full hover:bg-[#f78837]/90 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="bg-gray-500 hover:bg-gray-600 text-white text-base sm:text-lg px-6 sm:px-8 py-2 rounded-full transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            voltar
+            Voltar
           </button>
         )}
         <div className="flex-1" />
         <button
           onClick={handleNext}
           disabled={isSubmitting}
-          className="bg-[#f78837] text-white text-base sm:text-lg px-6 sm:px-8 py-2 rounded-full hover:bg-[#f78837]/90 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+          className="bg-[#f78837] hover:bg-[#f78837]/90 text-white text-base sm:text-lg px-6 sm:px-8 py-2 rounded-full transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 font-bold"
         >
           {isSubmitting && (
             <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
