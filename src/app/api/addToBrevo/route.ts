@@ -33,7 +33,7 @@ export async function POST(request: NextRequest) {
       body: JSON.stringify({
         email,
         attributes: { FIRSTNAME: nome || "" },
-        listIds: [1], // ID da sua lista no Brevo
+        listIds: [3], // ID da sua lista no Brevo
         updateEnabled: true,
       }),
     });
