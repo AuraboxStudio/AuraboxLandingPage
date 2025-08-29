@@ -24,18 +24,38 @@ export async function POST(request: NextRequest) {
 
     console.log("📤 Enviando para Brevo:", { email, nome });
 
+    // CONFIGURAÇÃO DAS LISTAS
+    const LISTA_ID = process.env.BREVO_LIST_ID ? 
+      parseInt(process.env.BREVO_LIST_ID) : 
+      null; // Substitua por null se não quiser adicionar a nenhuma lista específica
+
+    const dadosContato = {
+      email,
+      attributes: { 
+        FIRSTNAME: nome || "",
+        // Você pode adicionar mais atributos aqui:
+        // LASTNAME: sobrenome || "",
+        // SMS: telefone || "",
+        // Etc...
+      },
+      updateEnabled: true, // Permite atualizar se o contato já existir
+    };
+
+    // Só adiciona listIds se o ID da lista estiver configurado
+    if (LISTA_ID) {
+      (dadosContato as any).listIds = [LISTA_ID];
+      console.log(`📤 Adicionando à lista ID: ${LISTA_ID}`);
+    } else {
+      console.log("📤 Criando contato sem adicionar a lista específica");
+    }
+
     const response = await fetch("https://api.brevo.com/v3/contacts", {
       method: "POST",
       headers: {
         "api-key": process.env.BREVO_API_KEY,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        email,
-        attributes: { FIRSTNAME: nome || "" },
-        listIds: [3], // ID da sua lista no Brevo
-        updateEnabled: true,
-      }),
+      body: JSON.stringify(dadosContato),
     });
 
     const data = await response.json();
@@ -44,13 +64,23 @@ export async function POST(request: NextRequest) {
       console.error("❌ Erro do Brevo:", data);
       
       // Tratar erros específicos do Brevo
-      if (response.status === 400 && data.message?.includes("Contact already exist")) {
-        console.log("ℹ️ Contato já existe, atualizando...");
-        return NextResponse.json({ 
-          success: true, 
-          data,
-          message: "Contato atualizado com sucesso" 
-        });
+      if (response.status === 400) {
+        if (data.message?.includes("Contact already exist")) {
+          console.log("ℹ️ Contato já existe, atualizando...");
+          return NextResponse.json({ 
+            success: true, 
+            data,
+            message: "Contato atualizado com sucesso" 
+          });
+        }
+        
+        if (data.message?.includes("list")) {
+          console.error("❌ Erro relacionado à lista. Verifique o ID da lista.");
+          return NextResponse.json(
+            { success: false, error: "ID da lista inválido. Verifique a configuração." },
+            { status: 400 }
+          );
+        }
       }
       
       return NextResponse.json(
@@ -64,7 +94,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ 
       success: true, 
       data,
-      message: "Contato adicionado com sucesso" 
+      message: LISTA_ID ? `Contato adicionado à lista ${LISTA_ID}` : "Contato criado sem lista específica"
     });
 
   } catch (error: any) {
@@ -81,10 +111,17 @@ export async function POST(request: NextRequest) {
   }
 }
 
-// Método GET para teste (opcional)
+// Método GET para teste das configurações
 export async function GET() {
+  const LISTA_ID = process.env.BREVO_LIST_ID;
+  const API_KEY_EXISTS = !!process.env.BREVO_API_KEY;
+  
   return NextResponse.json({ 
     message: "API do Brevo funcionando",
+    config: {
+      apiKeyConfigured: API_KEY_EXISTS,
+      listId: LISTA_ID || "Não configurado",
+    },
     timestamp: new Date().toISOString()
   });
 }

@@ -187,6 +187,14 @@ export default function FormularioIdentificacao({
         body: JSON.stringify({
           email: formData.email,
           nome: formData.nome,
+          telefone: formData.telefone,
+          empresa: formData.empresa,
+          estado: formData.estado,
+          cidade: formData.cidade,
+          areaAtuacao: formData.areaAtuacao,
+          porteEmpresa: formData.porteEmpresa,
+          funcionarios: formData.funcionarios,
+          mensagem: formData.mensagem,
         }),
       });
 
