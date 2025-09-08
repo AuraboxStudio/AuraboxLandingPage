@@ -1,5 +1,5 @@
-// app/api/addToBrevo/route.ts
-import type { NextApiRequest, NextApiResponse } from 'next';
+// src/app/api/addToBrevo/route.ts
+import { NextResponse, type NextRequest } from 'next/server';
 
 interface FormData {
   email: string;
@@ -40,7 +40,7 @@ const LIST = {
 };
 
 // Função que retorna sempre a lista de Leads_Site
-const getListIds = (formData: FormData): number[] => {
+const getListIds = (): number[] => {
   return [LIST.LEADS_SITE].filter(Boolean); // só a lista principal
 };
 
@@ -108,20 +108,20 @@ const criarAutomacao = async (email: string, formData: FormData) => {
   }
 };
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Método não permitido' });
-  }
-
+// O ÚNICO MÓDULO QUE PRECISA DE MUDANÇA É ESSE:
+export async function POST(req: NextRequest) {
   try {
-    const formData: FormData = req.body;
+    const formData: FormData = await req.json();
 
     if (!formData.email || !formData.nome) {
-      return res.status(400).json({ error: 'Email e nome são obrigatórios' });
+      return NextResponse.json(
+        { error: 'Email e nome são obrigatórios' },
+        { status: 400 },
+      );
     }
 
     const { firstname, lastname } = parseNome(formData.nome);
-    const listIds = getListIds(formData);
+    const listIds = getListIds();
 
     const contactData: BrevoContact = {
       email: formData.email,
@@ -190,7 +190,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       criarAutomacao(formData.email, formData),
     ]).catch((error) => console.warn('⚠️ Erro nas automações:', error));
 
-    return res.status(200).json({
+    return NextResponse.json({
       success: true,
       message: 'Contato adicionado/atualizado com sucesso',
       lists: listIds,
@@ -198,12 +198,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     });
   } catch (error: unknown) {
     console.error('❌ Erro na API do Brevo:', error);
-    return res.status(500).json({
-      success: false,
-      error:
-        typeof error === 'object' && error !== null && 'message' in error
-          ? (error as { message?: string }).message || 'Erro interno do servidor'
-          : 'Erro interno do servidor',
-    });
+    return NextResponse.json(
+      {
+        success: false,
+        error:
+          typeof error === 'object' && error !== null && 'message' in error
+            ? (error as { message?: string }).message || 'Erro interno do servidor'
+            : 'Erro interno do servidor',
+      },
+      { status: 500 },
+    );
   }
 }
