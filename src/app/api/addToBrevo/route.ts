@@ -1,4 +1,4 @@
-// pages/api/addToBrevo.ts ou app/api/addToBrevo/route.ts
+// app/api/addToBrevo/route.ts
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 interface FormData {
@@ -33,59 +33,18 @@ interface BrevoContact {
   updateEnabled: boolean;
 }
 
-// Configuração de listas por critérios
-const getListIds = (formData: FormData): number[] => {
-  const lists: number[] = [3]; // Lista principal
-  
-  // Segmentação automática por porte da empresa
-  switch (formData.porteEmpresa) {
-    case 'MEI':
-      lists.push(2); // Lista MEI
-      break;
-    case 'Micro':
-      lists.push(3); // Lista Micro Empresa
-      break;
-    case 'Pequena':
-      lists.push(4); // Lista Pequena Empresa
-      break;
-    case 'Média':
-      lists.push(5); // Lista Média Empresa
-      break;
-    case 'Grande':
-      lists.push(6); // Lista Grande Empresa
-      break;
-  }
-  
-  // Segmentação por área de atuação
-  const areaLower = formData.areaAtuacao.toLowerCase();
-  if (areaLower.includes('ecommerce') || areaLower.includes('e-commerce')) {
-    lists.push(10); // Lista E-commerce
-  } else if (areaLower.includes('consultoria')) {
-    lists.push(11); // Lista Consultoria
-  } else if (areaLower.includes('saude') || areaLower.includes('saúde')) {
-    lists.push(12); // Lista Saúde
-  } else if (areaLower.includes('tecnologia') || areaLower.includes('tech')) {
-    lists.push(13); // Lista Tecnologia
-  }
-  
-  // Segmentação por região
-  const regioesSudeste = ['são paulo', 'rio de janeiro', 'minas gerais', 'espírito santo'];
-  const regioesSul = ['rio grande do sul', 'santa catarina', 'paraná'];
-  const regioesNordeste = ['bahia', 'pernambuco', 'ceará', 'maranhão', 'paraíba', 'alagoas', 'sergipe', 'rio grande do norte', 'piauí'];
-  
-  const estadoLower = formData.estado.toLowerCase();
-  if (regioesSudeste.some(estado => estadoLower.includes(estado))) {
-    lists.push(20); // Lista Região Sudeste
-  } else if (regioesSul.some(estado => estadoLower.includes(estado))) {
-    lists.push(21); // Lista Região Sul
-  } else if (regioesNordeste.some(estado => estadoLower.includes(estado))) {
-    lists.push(22); // Lista Região Nordeste
-  }
-  
-  return [...new Set(lists)]; // Remove duplicatas
+// ⚙️ IDs das listas no .env
+const LIST = {
+  LEADS_SITE: Number(process.env.BREVO_LIST_LEADS_SITE || 0),
+  CLIENTES: Number(process.env.BREVO_LIST_CLIENTES || 0), // opcional para futuro
 };
 
-// Função para extrair nome e sobrenome
+// Função que retorna sempre a lista de Leads_Site
+const getListIds = (formData: FormData): number[] => {
+  return [LIST.LEADS_SITE].filter(Boolean); // só a lista principal
+};
+
+// Extrai nome/sobrenome
 const parseNome = (nomeCompleto: string) => {
   const nomes = nomeCompleto.trim().split(' ');
   const firstname = nomes[0] || '';
@@ -93,19 +52,8 @@ const parseNome = (nomeCompleto: string) => {
   return { firstname, lastname };
 };
 
-// Função para enviar email de boas-vindas personalizado
-const enviarEmailBoasVindas = async (email: string, nome: string, porteEmpresa: string) => {
-  const templateIds = {
-    'MEI': 1, // Template para MEI
-    'Micro': 2, // Template para Micro Empresa
-    'Pequena': 3, // Template para Pequena Empresa
-    'Média': 4, // Template para Média Empresa
-    'Grande': 5, // Template para Grande Empresa
-    'default': 6 // Template padrão
-  };
-  
-  const templateId = templateIds[porteEmpresa as keyof typeof templateIds] || templateIds.default;
-  
+// (opcional) envia email de boas-vindas
+const enviarEmailBoasVindas = async (email: string, nome: string) => {
   try {
     const response = await fetch('https://api.brevo.com/v3/smtp/email', {
       method: 'POST',
@@ -115,15 +63,11 @@ const enviarEmailBoasVindas = async (email: string, nome: string, porteEmpresa: 
         'api-key': process.env.BREVO_API_KEY!,
       },
       body: JSON.stringify({
-        templateId: templateId,
-        to: [{ email: email, name: nome }],
-        params: {
-          NOME: nome,
-          PORTE_EMPRESA: porteEmpresa
-        }
+        templateId: 1, // ID do template padrão no Brevo
+        to: [{ email, name: nome }],
+        params: { NOME: nome },
       }),
     });
-    
     if (!response.ok) {
       console.warn('Falha ao enviar email de boas-vindas:', await response.text());
     } else {
@@ -134,9 +78,8 @@ const enviarEmailBoasVindas = async (email: string, nome: string, porteEmpresa: 
   }
 };
 
-// Função para criar automação personalizada
+// (opcional) dispara evento personalizado para automação
 const criarAutomacao = async (email: string, formData: FormData) => {
-  // Criar evento personalizado para trigger de automações
   try {
     const response = await fetch('https://api.brevo.com/v3/events', {
       method: 'POST',
@@ -146,18 +89,17 @@ const criarAutomacao = async (email: string, formData: FormData) => {
         'api-key': process.env.BREVO_API_KEY!,
       },
       body: JSON.stringify({
-        email: email,
+        email,
         event: 'FORMULARIO_PREENCHIDO',
         properties: {
           porte_empresa: formData.porteEmpresa,
           area_atuacao: formData.areaAtuacao,
           estado: formData.estado,
           tem_mensagem: !!formData.mensagem,
-          data_evento: new Date().toISOString()
-        }
+          data_evento: new Date().toISOString(),
+        },
       }),
     });
-    
     if (response.ok) {
       console.log('✅ Evento de automação criado para:', email);
     }
@@ -170,25 +112,23 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Método não permitido' });
   }
-  
+
   try {
     const formData: FormData = req.body;
-    
-    // Validação básica
+
     if (!formData.email || !formData.nome) {
       return res.status(400).json({ error: 'Email e nome são obrigatórios' });
     }
-    
-    // Preparar dados do contato
+
     const { firstname, lastname } = parseNome(formData.nome);
     const listIds = getListIds(formData);
-    
+
     const contactData: BrevoContact = {
       email: formData.email,
       attributes: {
         FIRSTNAME: firstname,
         LASTNAME: lastname,
-        SMS: formData.telefone.replace(/\D/g, ''), // Remove formatação
+        SMS: formData.telefone.replace(/\D/g, ''),
         COMPANY: formData.empresa,
         ESTADO: formData.estado,
         CIDADE: formData.cidade,
@@ -196,18 +136,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         PORTE_EMPRESA: formData.porteEmpresa,
         FUNCIONARIOS: formData.funcionarios ? parseInt(formData.funcionarios, 10) : undefined,
         MENSAGEM: formData.mensagem || undefined,
-        DATA_CADASTRO: new Date().toISOString().split('T')[0], // YYYY-MM-DD
+        DATA_CADASTRO: new Date().toISOString().split('T')[0],
       },
-      listIds: listIds,
-      updateEnabled: true, // Permite atualizar contato existente
+      listIds,
+      updateEnabled: true,
     };
-    
-    console.log('📤 Enviando contato para Brevo:', {
-      email: contactData.email,
-      listas: listIds,
-      porte: formData.porteEmpresa
-    });
-    
+
+    console.log('📤 Enviando contato para Brevo:', { email: contactData.email, listas: listIds });
+
     // Criar/atualizar contato no Brevo
     const response = await fetch('https://api.brevo.com/v3/contacts', {
       method: 'POST',
@@ -218,32 +154,28 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       },
       body: JSON.stringify(contactData),
     });
-    
+
     const responseData = await response.json();
-    
+
     if (!response.ok) {
-      // Se o contato já existe (código 400), tentar atualizar
       if (response.status === 400 && responseData.code === 'duplicate_parameter') {
         console.log('🔄 Contato já existe, atualizando...');
-        
-        const updateResponse = await fetch(`https://api.brevo.com/v3/contacts/${encodeURIComponent(formData.email)}`, {
-          method: 'PUT',
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'api-key': process.env.BREVO_API_KEY!,
+        const updateResponse = await fetch(
+          `https://api.brevo.com/v3/contacts/${encodeURIComponent(formData.email)}`,
+          {
+            method: 'PUT',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+              'api-key': process.env.BREVO_API_KEY!,
+            },
+            body: JSON.stringify({ attributes: contactData.attributes, listIds: contactData.listIds }),
           },
-          body: JSON.stringify({
-            attributes: contactData.attributes,
-            listIds: contactData.listIds,
-          }),
-        });
-        
+        );
         if (!updateResponse.ok) {
           const updateError = await updateResponse.json();
           throw new Error(`Erro ao atualizar contato: ${updateError.message}`);
         }
-        
         console.log('✅ Contato atualizado no Brevo');
       } else {
         throw new Error(`Erro da API Brevo: ${responseData.message || response.statusText}`);
@@ -251,29 +183,27 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     } else {
       console.log('✅ Novo contato criado no Brevo');
     }
-    
-    // Executar automações em paralelo (não bloqueante)
+
+    // Disparar automações em paralelo
     Promise.all([
-      enviarEmailBoasVindas(formData.email, formData.nome, formData.porteEmpresa),
-      criarAutomacao(formData.email, formData)
-    ]).catch(error => {
-      console.warn('⚠️ Erro nas automações:', error);
-    });
-    
+      enviarEmailBoasVindas(formData.email, formData.nome),
+      criarAutomacao(formData.email, formData),
+    ]).catch((error) => console.warn('⚠️ Erro nas automações:', error));
+
     return res.status(200).json({
       success: true,
       message: 'Contato adicionado/atualizado com sucesso',
       lists: listIds,
-      id: responseData.id || 'atualizado'
+      id: responseData.id || 'atualizado',
     });
-    
   } catch (error: unknown) {
     console.error('❌ Erro na API do Brevo:', error);
     return res.status(500).json({
       success: false,
-      error: typeof error === 'object' && error !== null && 'message' in error
-        ? (error as { message?: string }).message || 'Erro interno do servidor'
-        : 'Erro interno do servidor'
+      error:
+        typeof error === 'object' && error !== null && 'message' in error
+          ? (error as { message?: string }).message || 'Erro interno do servidor'
+          : 'Erro interno do servidor',
     });
   }
 }
