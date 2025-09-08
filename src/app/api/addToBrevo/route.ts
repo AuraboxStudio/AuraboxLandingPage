@@ -123,12 +123,16 @@ export async function POST(req: NextRequest) {
     const { firstname, lastname } = parseNome(formData.nome);
     const listIds = getListIds();
 
+    // ➡️ AQUI ESTÁ A CORREÇÃO
+    const cleanedPhoneNumber = formData.telefone.replace(/\D/g, ''); 
+    const formattedPhoneNumber = `+55${cleanedPhoneNumber}`;
+
     const contactData: BrevoContact = {
       email: formData.email,
       attributes: {
         FIRSTNAME: firstname,
         LASTNAME: lastname,
-        SMS: formData.telefone.replace(/\D/g, ''),
+        SMS: formattedPhoneNumber, // Use o número formatado
         COMPANY: formData.empresa,
         ESTADO: formData.estado,
         CIDADE: formData.cidade,
