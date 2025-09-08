@@ -206,11 +206,11 @@ export default function FormularioIdentificacao({
 
       console.log("✅ Dados enviados para Brevo com sucesso:", data);
       return data;
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('❌ Erro ao enviar para Brevo:', error);
       // Não vamos falhar o envio por causa do Brevo
       // Apenas logamos o erro
-      return { success: false, error: error.message };
+      return { success: false, error: error instanceof Error ? error.message : String(error) };
     }
   };
 
@@ -321,7 +321,7 @@ export default function FormularioIdentificacao({
               <input
                 type={field === "email" ? "email" : "text"}
                 name={field}
-                value={(formData as any)[field]}
+                value={typeof formData[field as keyof FormData] === "boolean" ? "" : String(formData[field as keyof FormData])}
                 onChange={(e) =>
                   handleChange(field as keyof FormData, e.target.value)
                 }
@@ -354,7 +354,7 @@ export default function FormularioIdentificacao({
               <input
                 type="text"
                 name={field}
-                value={(formData as any)[field]}
+                value={typeof formData[field as keyof FormData] === "boolean" ? "" : String(formData[field as keyof FormData])}
                 onChange={(e) =>
                   handleChange(field as keyof FormData, e.target.value)
                 }
